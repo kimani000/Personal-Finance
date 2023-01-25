@@ -1,0 +1,37 @@
+
+
+#flexRowHome1, #flexRowHome2 {
+    border: ridge !important;
+    border-width: 4px;
+    margin: 1em 3em 3em 3em;
+    padding: 1em 1em 2em 1em;
+    border-color: white !important; 
+    box-shadow: 5px 8px 15px;
+    /* border-top: none !important;*/
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+}
+
+#freeTrialRow {
+    height: 375px !important;
+}
+
+#signUpButton {
+    background-color: #26272b;
+    color: white;
+    width: 400px;
+    margin-bottom: 4em;
+    border: solid #26272b;
+    /* border-radius: 10px; */
+}
+
+#signUpButton:hover {
+    background-color: white;
+    color: #3b71ca;
+    border: solid #3b71ca;
+}
+
+pf-modal {
+    display: none;
+}

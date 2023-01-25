@@ -1,0 +1,48 @@
+<div class="card mt-1 text-white">
+    <div class="row text-center">
+        <p class="mt-4 mb-0 pb-0" style="font-size: 3.5em;"><em>Welcome to PFINANCE!</em></p><br>
+        <p class="my-0 pb-0" style="font-size:x-large"><em>Your personal, online financial management application.</em>
+        </p>
+    </div>
+    <div id="flexRowHome1" class="d-flex flex-row rounded">
+        <div class="col-md-8 pt-5">
+            <p class="display-6"><b>Financial Liberation!</b></p>
+            <p class="my-0 pb-0" style="font-size:x-large">PFINANCE will allow you to budget in accordance with your
+                weekly, bi-weekly, monthly, or annual income.
+                <br>More than 300 users have reported positive growth in their savings, and 25% reduction in weekly
+                spendings.
+            </p>
+        </div>
+        <div class="col-md-4 text-center pt-4">
+            <img src="../../assets/Images/IncreasedSavings.jpg" class="rounded img-fluid pt-1"
+                style="height: 14em; width: auto;">
+        </div>
+
+    </div>
+    <div id="flexRowHome2" class="d-flex flex-row-reverse rounded">
+        <div class="col-md-8 pt-5">
+            <div class="row float-right">
+                <p class="display-6 float-right"><b>For The Future!</b></p>
+            </div>
+            <p class="my-0 pb-0" style="font-size:x-large">For yourself or for loved ones, PFinance provides tools
+                necessary
+                for financial success.<br> Many users have different financial goals in mind and that's okay!
+                You can decalre your financial goals in account setting. This way we can help you create a custom
+                budgetting system
+                that works for you and your vision.
+            </p>
+        </div>
+        <div class="col-md-4 text-center pt-4">
+            <img src="../../assets/Images/budget.jpg" class="rounded img-fluid pt-1" style="height: 14em; width: auto;">
+        </div>
+    </div>
+</div>
+<div id="freeTrialRow" class="row text-center pt-4">
+    <p class="display-4 text-light pt-5 pb-0">Start Your Free Trial Today</p>
+    <div class="col-md align-self-center">
+        <button  id="signUpButton" type="button" class="btn btn-lg rounded-pill"
+            (click)="modalService.open('modal-1')">Sign Up</button>
+    </div>
+</div>
+
+<pf-modal id="modal-1"></pf-modal>

@@ -1,0 +1,28 @@
+<div class="pf-budget-modal">
+    <div class="pf-budget-modal-body">
+        <div class="d-flex justify-content-end mb-3">
+            <p class="display-4 text-white" style="padding-right: 25px;"><em>Add New Income!</em>
+            </p>
+            <div class="flex-shrink-0">
+                <button (click)="close()" class="btn btn-lg">x</button>
+            </div>
+        </div>
+        <!-- below should be converted into a form-->
+        <form [formGroup]="newIncomeForm" (ngSubmit)="onSubmit()">
+            <div>
+                <div class="d-flex justify-content-start">
+                    <label for="Income">Income :</label>
+                    <input id="Income" name="Income" formControlName="Income" required>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <label id="amountLabel" for="amount" class="pr-0">Amount :</label>
+                    <span>$</span><input type="number" id="amount" name="amount" min="1" formControlName="Amount" required>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4 mx-4 mb-0 pb-0">
+                <button (click)="close()" id="cancelAddIncomeBtn" class="btn btn-lg">Cancel</button>
+                <button id="confirmAddIncomeBtn" type="submit" class="btn btn-lg">Add</button>
+            </div>
+        </form>
+    </div>
+</div>

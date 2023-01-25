@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "location": "Walmart",
+        "amount": 353.79,
+        "expenseCategory": "Grocery",
+        "paymentType": "Credit",
+        "date": "12/05/2022"
+    },
+    {
+        "id": 2,
+        "location": "Circle-K",
+        "amount": 71.77,
+        "expenseCategory": "Gas",
+        "paymentType": "Cash",
+        "date": "12/25/2022"
+    },
+    {
+        "id": 3,
+        "location": "Panera",
+        "amount": 25.64,
+        "expenseCategory": "Other",
+        "paymentType": "Debit",
+        "date": "11/15/2022"
+    },
+    {
+        "id": 4,
+        "location": "Mike's Auto Shop",
+        "amount": 425.54,
+        "expenseCategory": "Business",
+        "paymentType": "Credit",
+        "date": "11/01/2022"
+    },
+    {
+        "id": 5,
+        "location": "PFinance Payroll",
+        "amount": 338.00,
+        "expenseCategory": "Business",
+        "paymentType": "Cash",
+        "date": "10/27/2022"
+    },
+    {
+        "id": 6,
+        "location": "MAA",
+        "amount": 854.99,
+        "expenseCategory": "Bills",
+        "paymentType": "Debit",
+        "date": "10/17/2022"
+    },
+    {
+        "id": 7,
+        "location": "Chevron",
+        "amount": 83.99,
+        "expenseCategory": "Gas",
+        "paymentType": "Credit",
+        "date": "09/20/2022"
+    },
+    {
+        "id": 8,
+        "location": "Foot Locker",
+        "amount": 159.99,
+        "expenseCategory": "Other",
+        "paymentType": "Cash",
+        "date": "09/10/2022"
+    },
+    {
+        "id": 9,
+        "location": "MAA",
+        "amount": 854.99,
+        "expenseCategory": "Bills",
+        "paymentType": "Debit",
+        "date": "08/17/2022"
+    },
+    {
+        "id": 10,
+        "location": "Costco",
+        "amount": 333.71,
+        "expenseCategory": "Grocery",
+        "paymentType": "Credit",
+        "date": "08/04/2022"
+    }
+]

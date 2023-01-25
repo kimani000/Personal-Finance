@@ -1,0 +1,21 @@
+#expenseDetailCard {
+    width: inherit;
+    height: 100%;
+    background-color: white;
+    opacity: 0.9;
+}
+
+p {
+    margin: 20px auto;
+}
+
+button {
+    margin-top: 25px;
+    border: solid #3b71ca;
+}
+
+button:hover {
+    background-color: white;
+    color: #3b71ca !important;
+    border: solid #3b71ca;
+}

@@ -1,0 +1,17 @@
+<!--TODO: Style this component and make it look nice!-->
+<!---->
+<!---->
+<div id="expenseDetailCard" class="card pt-2" style="font-size: x-large;">
+    <div class="flex-row text-primary">
+        <p>Id : {{expense.id}}</p>
+        <p>Location : {{expense.location}}</p>
+        <p>Amount : {{expense.amount | currency: 'USD'}}</p>
+        <p>Category : {{expense.expenseCategory}}</p>
+        <p>Payment Type : {{expense.paymentType}}</p>
+        <p>Date : {{expense.date}}</p>
+    </div>
+    <div class="flex-row">
+        <button (click)="onClose(false)" class="btn btn-primary text-white w-25 ml-3">Close</button>
+    </div>
+
+</div>

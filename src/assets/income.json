@@ -1,0 +1,22 @@
+[
+    {
+      "incomeId": 1,
+      "incomeName": "Music Production",
+      "incomeAmount": 100000
+    },
+    {
+        "incomeId": 2,
+        "incomeName": "Free Lance",
+        "incomeAmount": 50000
+    },
+    {
+      "incomeId": 3,
+      "incomeName": "Wells Fargo",
+      "incomeAmount": 5000
+    },
+    {
+      "incomeId": 4,
+      "incomeName": "Old Town Smoke Shop",
+      "incomeAmount": 2000
+    }
+  ]
