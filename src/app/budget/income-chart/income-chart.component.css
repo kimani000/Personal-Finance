@@ -1,0 +1,8 @@
+pf-budget-modal {
+    display: none;
+}
+
+#charts {
+    height: 600px !important;
+    width: 600px !important;
+}

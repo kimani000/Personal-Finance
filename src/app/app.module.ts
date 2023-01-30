@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbAccordionModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
 import { ExpenseDetailComponent } from './budget/expense-detail/expense-detail.component';
+import { IncomeChartComponent } from './budget/income-chart/income-chart.component';
+import { ExpenseComponent } from './budget/expense/expense.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { ExpenseDetailComponent } from './budget/expense-detail/expense-detail.c
     BudgetComponent,
     BudgetModalComponent,
     ExpenseDetailComponent,
+    IncomeChartComponent,
+    ExpenseComponent,
   ],
   imports: [
     CommonModule,
