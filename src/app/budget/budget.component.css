@@ -2,36 +2,6 @@
     margin: 1em 3em 3em 3em;
     padding: 1em 1em 2em 1em;
 }
-
-#charts {
-    height: 600px !important;
-    width: 600px !important;
-}
-
-#displayContainer {
-    background-color: transparent;
-    margin: auto;
-    height: auto !important;
-    width: auto;
-    display: block;
-    justify-content: center;
-}
-
-#spendingByCategorDiv::-webkit-scrollbar{
-    display: none;
-}
-
-#expensesBtn {
-    width: 95%;
-    color: white;
-    font-size: larger;
-}
-
-#expensesBtn:hover {
-    background-color: white;
-    color: #3b71ca;
-}
-
 .add-btn-row {
     padding-right: 10px;
     margin-top: 8px;
@@ -51,14 +21,4 @@
     background-color: white;
     color: #3b71ca;
     border: solid #3b71ca 1px;
-}
-
-#expenseDetailCol {
-    height: 500px;
-    width: 35%;
-    margin-left: 30px;
-}
-
-pf-budget-modal {
-    display: none;
 }
