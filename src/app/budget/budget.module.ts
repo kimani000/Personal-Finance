@@ -13,9 +13,11 @@ import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
-  { path: 'budget', component: BudgetComponent }
+  { path: 'pfinance', pathMatch: 'prefix',
+    children: [
+    { path: 'budget', component: BudgetComponent },
+  ] },
 ]
-
 
 @NgModule({
   declarations: [
