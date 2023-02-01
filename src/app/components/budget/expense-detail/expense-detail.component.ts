@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BudgetService } from '../budget.service';
-import { IExpense } from '../interfaces/expense';
+import { BudgetService } from '../../../services/budget/budget.service';
+import { IExpense } from '../../../models/interfaces/expense';
 
 @Component({
   selector: 'pf-expense-detail',

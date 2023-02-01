@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IIncome } from 'src/app/budget/interfaces/income';
-import { ModalService } from '../modal.service';
+import { IIncome } from '../../../models/interfaces/income';
+import { ModalService } from '../../../services/modal/modal.service';
 
 @Component({
   selector: 'pf-budget-modal',

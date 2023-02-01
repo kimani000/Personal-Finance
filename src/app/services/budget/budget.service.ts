@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, filter, map, Observable, throwError } from 'rxjs';
-import { IIncome } from './interfaces/income';
-import { IExpense } from './interfaces/expense';
-import { ExpenseCategory } from './enums/expense-category';
+import { IIncome } from '../../models/interfaces/income';
+import { IExpense } from '../../models/interfaces/expense';
+import { ExpenseCategory } from '../../models/enums/expense-category';
 import { DefaultUrlSerializer } from '@angular/router';
-import { PaymentType } from './enums/payment-type';
+import { PaymentType } from '../../models/enums/payment-type';
 
 @Injectable({
   providedIn: 'root'

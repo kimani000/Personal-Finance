@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalService } from '../modal.service';
+import { ModalService } from '../../../services/modal/modal.service';
 
 @Component({
   selector: 'pf-modal',

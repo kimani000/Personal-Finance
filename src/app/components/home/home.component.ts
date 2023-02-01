@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '../modals/modal.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   templateUrl: './home.component.html',

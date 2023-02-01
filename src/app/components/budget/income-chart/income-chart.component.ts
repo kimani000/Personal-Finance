@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
-import { ModalService } from 'src/app/modals/modal.service';
-import { BudgetService } from '../budget.service';
-import { IIncome } from '../interfaces/income';
+import { ModalService } from 'src/app/services/modal/modal.service';
+import { BudgetService } from '../../../services/budget/budget.service';
+import { IIncome } from '../../../models/interfaces/income';
 
 @Component({
   selector: 'pf-income-chart',
