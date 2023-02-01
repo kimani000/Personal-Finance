@@ -21,7 +21,7 @@
         </div>
         <!-- Change this to addExpense() modal function-->
         <!-- (click)="addIncome('modal-2')" -->
-        <div class="row float-end add-btn-row">
+        <div class="row float-end add-btn-row ">
             <button id="btnAddNew" class="btn btn-primary rounded">
                 <span id="addNewIcon" class="fa-solid fa-plus float-start"></span>Add
             </button>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- If category button IS clicked-->
-        <div *ngIf="expenseCategoryIsSelected" id="spendingByCategorDiv" style="padding-top: 35px!important; padding-bottom: 35px !important; overflow-y: scroll !important;;">
+        <div *ngIf="expenseCategoryIsSelected && !expenseIsSelected" id="spendingByCategorDiv" style="padding-top: 35px!important; padding-bottom: 35px !important; overflow-y: scroll !important;;">
             <p class="text-white text-start mb-0 pb-0e">*By Location:</p>
 
             <button id="expensesBtn" *ngFor="let e of expenseArrByCategory; let i = index"

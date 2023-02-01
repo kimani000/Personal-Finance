@@ -12,8 +12,8 @@ import { PaymentType } from '../../models/enums/payment-type';
 })
 export class BudgetService {
 
-  private incomeUrl = 'http://localhost:4200/assets/income.json';
-  private expenseUrl = 'http://localhost:4200/assets/spending.json';
+  private incomeUrl = 'http://localhost:4200/assets/json/income.json';
+  private expenseUrl = 'http://localhost:4200/assets/json/expense.json';
 
   constructor(private http: HttpClient) { }
 
