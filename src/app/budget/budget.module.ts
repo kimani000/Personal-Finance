@@ -11,12 +11,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { BudgetTableComponent } from './budget-table/budget-table.component';
 
 const routes: Routes = [
   { path: 'pfinance', pathMatch: 'prefix',
     children: [
     { path: 'budget', component: BudgetComponent },
-  ] },
+  ]},
 ]
 
 @NgModule({
@@ -26,6 +28,7 @@ const routes: Routes = [
     IncomeChartComponent,
     ExpenseDetailComponent,
     ExpenseComponent,
+    BudgetTableComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ const routes: Routes = [
     HttpClientModule,
     NgChartsModule,
     BrowserAnimationsModule,
+    MatTableModule,
     RouterModule.forChild(routes)
   ]
 })
