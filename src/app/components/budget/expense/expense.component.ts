@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ModalService } from '../../modals/modal.service';
-import { BudgetService } from '../budget.service';
-import { ExpenseCategory } from '../enums/expense-category';
-import { IExpense } from '../interfaces/expense';
+import { ModalService } from '../../../services/modal/modal.service';
+import { BudgetService } from '../../../services/budget/budget.service';
+import { ExpenseCategory } from '../../../models/enums/expense-category';
+import { IExpense } from '../../../models/interfaces/expense';
 import {trigger, style, animate, transition} from '@angular/animations';
 
 
