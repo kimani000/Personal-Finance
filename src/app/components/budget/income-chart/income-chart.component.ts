@@ -36,6 +36,8 @@ export class IncomeChartComponent implements OnInit {
   @ViewChild(BaseChartDirective)
   chart!: BaseChartDirective;
 
+  modalIsDisplayed = false;
+
   constructor(private budgetService: BudgetService, private modalService: ModalService) {
   }
 
@@ -76,7 +78,10 @@ export class IncomeChartComponent implements OnInit {
 
   // Functions for add new income functionality
   addIncome(id: string) {
-    this.modalService.open(id);
+    this.modalIsDisplayed = true;
+    setTimeout(() => {
+      this.modalService.open(id);
+    }, 100);
   }
 
   addNewIncome(event: IIncome) {
@@ -85,6 +90,7 @@ export class IncomeChartComponent implements OnInit {
       this.doughnutChartData.datasets[0].data.push(event.incomeAmount);
       this.updateChart();
     } 
+    this.modalIsDisplayed = false;
   }
 
 }

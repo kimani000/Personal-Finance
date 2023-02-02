@@ -1,10 +1,65 @@
 [
     {
         "id": 1,
-        "location": "Walmart",
-        "amount": 353.79,
-        "expenseCategory": "Grocery",
-        "paymentType": "Credit",
-        "date": "12/05/2022"
+        "name": "Rent",
+        "projectedCost": 700,
+        "actualCost": 750.99,
+        "category": "Bills"
+    },
+    {
+        "id": 2,
+        "name": "Electric",
+        "projectedCost": 50,
+        "actualCost": 61.88,
+        "category": "Bills"
+    },
+    {
+        "id": 3,
+        "name": "Walmart - Grocery",
+        "projectedCost": 300,
+        "actualCost": 288.41,
+        "category": "Grocery"
+    },
+    {
+        "id": 4,
+        "name": "Payroll",
+        "projectedCost": 5000,
+        "actualCost": 5000,
+        "category": "Business"
+    },
+    {
+        "id": 5,
+        "name": "Car Payment",
+        "projectedCost": 363,
+        "actualCost": 421.88,
+        "category": "Bills"
+    },
+    {
+        "id": 6,
+        "name": "Hawaii Trip",
+        "projectedCost": 7500.99,
+        "actualCost": 8000.49,
+        "category": "Other"
+    },
+    {
+        "id": 7,
+        "name": "Gas",
+        "projectedCost": 200,
+        "actualCost": 200,
+        "category": "Gas"
+    },
+    {
+        "id": 8,
+        "name": "Target - Grocery",
+        "projectedCost": 65,
+        "actualCost": 101.57,
+        "category": "Grocery"
+    },
+    {
+        "id": 9,
+        "name": "Birthday Party",
+        "projectedCost": 450,
+        "actualCost": 402.87,
+        "category": "Other"
     }
 ]

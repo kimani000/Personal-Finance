@@ -5,7 +5,7 @@ export interface IExpense {
     id: number;
     location: string;
     amount: number;
-    expenseCategory?: ExpenseCategory;
+    category?: ExpenseCategory;
     paymentType?: PaymentType;
     date: Date
 }
