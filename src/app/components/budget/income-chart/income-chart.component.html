@@ -26,4 +26,6 @@
     </div>
 </div>
 
-<pf-budget-modal id="modal-2" (newIncomeEvent)="addNewIncome($event)"></pf-budget-modal>
+<div *ngIf="modalIsDisplayed">    
+    <pf-budget-modal id="modal-2" (newIncomeEvent)="addNewIncome($event)"></pf-budget-modal>
+</div>

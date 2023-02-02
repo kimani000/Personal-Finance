@@ -6,14 +6,17 @@ import { IExpense } from '../../models/interfaces/expense';
 import { ExpenseCategory } from '../../models/enums/expense-category';
 import { DefaultUrlSerializer } from '@angular/router';
 import { PaymentType } from '../../models/enums/payment-type';
+import { IBudget } from 'src/app/models/interfaces/buget';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BudgetService {
 
-  private incomeUrl = 'http://localhost:4200/assets/income.json';
-  private expenseUrl = 'http://localhost:4200/assets/spending.json';
+  private incomeUrl = 'http://localhost:4200/assets/json/income.json';
+  private expenseUrl = 'http://localhost:4200/assets/json/expense.json';
+  private budgetUrl = 'http://localhost:4200/assets/json/budget.json';
+
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +31,7 @@ export class BudgetService {
       map(data => {
         // transform props that are supposed to be enum value
         for(let i = 0; i < data.length; i++) {
-          data[i].expenseCategory = this.transformToExpenseCategoryType(data[i]);
+          data[i].category = this.transformToExpenseCategoryType(data[i]);
           data[i].paymentType = this.transformToPaymentType(data[i]);
         }
         return data;
@@ -37,6 +40,20 @@ export class BudgetService {
     )
   }
 
+  getBudgets(): Observable<IBudget[]>{
+    return this.http.get<IBudget[]>(this.budgetUrl).pipe(
+      map(data => {
+        // transform prop to enum value
+        for(let i = 0; i < data.length; i++) {
+          data[i].category = this.transformToExpenseCategoryType(data[i]);
+        }
+        return data;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+  // TODO: See if this actually works
   getAllCategoryEnum(): ExpenseCategory[] {
     var strEnumArr: string[] = Object.keys(ExpenseCategory);
     var enumArr: ExpenseCategory[] = [];
@@ -68,9 +85,10 @@ export class BudgetService {
     return throwError(() => errorMessgae);
   }
 
-  private transformToExpenseCategoryType(expense: IExpense): (ExpenseCategory | undefined) {
+  private transformToExpenseCategoryType(paramObj: (IExpense | IBudget)): (ExpenseCategory | undefined) {
     
-    switch(expense.expenseCategory){
+    
+    switch(paramObj.category){
       case 'Grocery':
         return ExpenseCategory.GROCERY;
       case 'Business':

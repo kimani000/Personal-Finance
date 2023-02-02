@@ -12,19 +12,19 @@ import { IIncome } from '../../../models/interfaces/income';
   styleUrls: ['./income-chart.component.css', '../budget.component.css']
 })
 export class IncomeChartComponent implements OnInit {
-  sub! : Subscription;
+  sub!: Subscription;
   errorMessage: string = '';
 
   // Doughnut chart/income related variables
   incomes: IIncome[] = [];
-  totalIncome : number = 0;
+  totalIncome: number = 0;
   defaultTotalIncomeTitle: string = "Total Income";
 
   doughnutChartLabels: string[] = [];
   doughnutChartData: ChartData<'doughnut'> = {
     labels: this.doughnutChartLabels,
     datasets: [
-      { data: [ ] }
+      { data: [] }
     ]
   }
   doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
@@ -34,14 +34,16 @@ export class IncomeChartComponent implements OnInit {
   };
 
   @ViewChild(BaseChartDirective)
-   chart!: BaseChartDirective;
+  chart!: BaseChartDirective;
 
-   constructor(private budgetService: BudgetService, private modalService: ModalService){
-   }
+  modalIsDisplayed = false;
 
-   // Lifecycle Hooks
-   ngOnInit(): void {
-     // GET incomes
+  constructor(private budgetService: BudgetService, private modalService: ModalService) {
+  }
+
+  // Lifecycle Hooks
+  ngOnInit(): void {
+    // GET incomes
     this.sub = this.budgetService.getIncomes().subscribe({
       next: income => {
         this.incomes = income;
@@ -50,15 +52,15 @@ export class IncomeChartComponent implements OnInit {
       },
       error: err => this.errorMessage = err
     });
-   }
+  }
 
-   ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
   // Initalize total income variable
   getTotalIncomeLogged(): void {
-    this.totalIncome += this.incomes.reduce((sum, income) => sum + income.incomeAmount, 0 );
+    this.totalIncome += this.incomes.reduce((sum, income) => sum + income.incomeAmount, 0);
   }
 
   // Functions for income chart
@@ -67,7 +69,7 @@ export class IncomeChartComponent implements OnInit {
       this.doughnutChartLabels.push(income.incomeName);
       this.doughnutChartData.datasets[0].data.push(income.incomeAmount);
     });
-    this.updateChart();
+    this.updateChart()
   }
 
   updateChart(): void {
@@ -76,13 +78,19 @@ export class IncomeChartComponent implements OnInit {
 
   // Functions for add new income functionality
   addIncome(id: string) {
-    this.modalService.open(id);
+    this.modalIsDisplayed = true;
+    setTimeout(() => {
+      this.modalService.open(id);
+    }, 100);
   }
 
   addNewIncome(event: IIncome) {
-    this.doughnutChartLabels.push(event.incomeName);
-    this.doughnutChartData.datasets[0].data.push(event.incomeAmount);
-    this.updateChart();
+    if (event.incomeName !== null && event.incomeAmount !== null) {
+      this.doughnutChartLabels.push(event.incomeName);
+      this.doughnutChartData.datasets[0].data.push(event.incomeAmount);
+      this.updateChart();
+    } 
+    this.modalIsDisplayed = false;
   }
 
 }

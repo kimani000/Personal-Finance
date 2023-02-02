@@ -67,7 +67,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   displaySpendingInCategory(expenseCategory: ExpenseCategory): void{
     this.expenseCategoryIsSelected = true;
     this.expenseArrByCategory = this.expenses.filter(expense => {
-      return expense.expenseCategory === expenseCategory;
+      return expense.category === expenseCategory;
     })
   }
 

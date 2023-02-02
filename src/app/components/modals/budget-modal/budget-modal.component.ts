@@ -33,7 +33,7 @@ export class BudgetModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // remove self from modal service
-    this.modalService.remove(this);
+    this.modalService.remove(this.id);
 
     // remove modal element from html
     this.element.remove();

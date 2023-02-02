@@ -1,31 +1,59 @@
-import { Component } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { IBudget } from 'src/app/models/interfaces/buget';
+import { BudgetService } from 'src/app/services/budget/budget.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'pf-budget-table',
   templateUrl: './budget-table.component.html',
   styleUrls: ['./budget-table.component.css', '../budget.component.css']
 })
-export class BudgetTableComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class BudgetTableComponent implements OnInit {
+  // subscription
+  sub!: Subscription;
+  errorMessage: string = '';
+
+  // budget data variables
+  displayedColumns: string[] = ['id', 'name', 'category', 'projectedCost', 'actualCost', 'difference', 'actions'];
+  budgetData: IBudget[] = [];
+
+  // modal variables
+  modalIsDisplayed = false;
+
+  // ctor
+  constructor(private budgetService: BudgetService, private modalService: ModalService){
+  }
+
+  // lifecycle hooks
+  ngOnInit(): void {
+    this.sub = this.budgetService.getBudgets().subscribe({
+      next: budget => {
+        this.budgetData = budget;
+        this.calculateDifference();
+      } 
+    })
+  }
+
+  // function that calcualtes the difference between projectedCost and acutalCost for each budget
+  calculateDifference(): void {
+    this.budgetData.map( budget => {
+      budget.difference = budget.projectedCost - budget.actualCost;
+    })
+  }
+
+  budgetTableAction(action: string, id: string): void {
+    
+    /** TODO:
+     * Modal component for this action has been created.
+     * Next thing to do is figure out if I can recycle the same modal for edit and delete.
+     * 
+     */
+    this.modalIsDisplayed = true;
+    setTimeout(() => {
+      this.modalService.open(id);
+    }, 100);
+
+    // if(action === 'edit' || action === 'delete') this.modalService.open('modal-3');
+  }
 }
