@@ -20,6 +20,7 @@ export class BudgetTableComponent implements OnInit {
 
   // modal variables
   modalIsDisplayed = false;
+  modalAction!: ('add' | 'edit' | 'delete');
 
   // ctor
   constructor(private budgetService: BudgetService, private modalService: ModalService){
@@ -42,18 +43,19 @@ export class BudgetTableComponent implements OnInit {
     })
   }
 
-  budgetTableAction(action: string, id: string): void {
-    
-    /** TODO:
-     * Modal component for this action has been created.
-     * Next thing to do is figure out if I can recycle the same modal for edit and delete.
-     * 
-     */
+  AddEditDeleteBudgetModal(action: ('add' | 'edit' | 'delete'), id: string): void {
     this.modalIsDisplayed = true;
+    this.modalAction = action;
+    
     setTimeout(() => {
-      this.modalService.open(id);
+      switch (action) {
+        case 'edit':
+          this.modalService.open('modal-3');
+          break;
+        case 'delete':
+          this.modalService.open('modal-3');
+          break;
+      }
     }, 100);
-
-    // if(action === 'edit' || action === 'delete') this.modalService.open('modal-3');
   }
 }
