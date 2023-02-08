@@ -1,28 +1,25 @@
-<div class="pf-budget-modal">
-    <div class="pf-budget-modal-body">
-        <div class="d-flex justify-content-end mb-3">
-            <p class="display-4 text-white" style="padding-right: 25px;"><em>Add New Income!</em>
-            </p>
-            <div class="flex-shrink-0">
-                <button (click)="close()" class="btn btn-lg">x</button>
-            </div>
-        </div>
-        <!-- below should be converted into a form-->
-        <form [formGroup]="newIncomeForm" (ngSubmit)="onSubmit()">
-            <div>
-                <div class="d-flex justify-content-start">
-                    <label for="Income">Income :</label>
-                    <input id="Income" name="Income" formControlName="Income" required>
-                </div>
-                <div class="d-flex justify-content-start">
-                    <label id="amountLabel" for="amount" class="pr-0">Amount :</label>
-                    <span>$</span><input type="number" id="amount" name="amount" min="1" formControlName="Amount" required>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between mt-4 mx-4 mb-0 pb-0">
-                <button (click)="close()" id="cancelAddIncomeBtn" class="btn btn-lg">Cancel</button>
-                <button id="confirmAddIncomeBtn" type="submit" class="btn btn-lg">Add</button>
-            </div>
-        </form>
+<!-- Add New Income Modal-->
+<h1 class="text-center my-1" mat-dialog-title
+    style="font-size: x-large;">Add New Income!</h1>
+
+<mat-dialog-content>
+    <div class="container">
+        <mat-form-field appearance="fill">
+            <mat-label>Income Name</mat-label>
+            <input matInput [formControl]="name" placeholder="Income Name" required>
+            <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Income Amount</mat-label>
+            <input matInput [formControl]="amount" placeholder="Income Amount" required>
+            <mat-error *ngIf="amount.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        
     </div>
-</div>
+    <!-- <div class="border-bottom border-dark mb-1"></div> -->
+    <div class="d-flex justify-content-between mt-2">
+        <button mat-button color="primary" (click)="close()">Close</button>
+        <button mat-button color="primary" (click)="onSubmit()">Submit</button>
+    </div>
+</mat-dialog-content>

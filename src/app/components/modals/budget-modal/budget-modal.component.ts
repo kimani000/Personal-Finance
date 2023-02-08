@@ -1,67 +1,40 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { IIncome } from '../../../models/interfaces/income';
-import { ModalService } from '../../../services/modal/modal.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Income } from '../../../models/income.models';
 
 @Component({
   selector: 'pf-budget-modal',
   templateUrl: './budget-modal.component.html',
   styleUrls: ['./budget-modal.component.css']
 })
-export class BudgetModalComponent implements OnInit, OnDestroy {
-  @Input() id?: string;
-  @Output() newIncomeEvent = new EventEmitter<IIncome>();
-  isOpen = false;
-  private element: any;
-  newIncomeForm: FormGroup;
+export class BudgetModalComponent implements OnInit{
 
-  constructor(private modalService: ModalService, private el: ElementRef) {
-    this.element = el.nativeElement;
-    this.newIncomeForm = new FormGroup({
-      Income: new FormControl(),
-      Amount: new FormControl()
-    });
-  }
+  name = new FormControl('', Validators.required);
+  amount = new FormControl('', Validators.required);
 
-  ngOnInit(): void {
-    // add self (this modal instance) to the modal service so it can be opened from any component
-    this.modalService.add(this);
 
-    // move element to bottom of page (just before </body>) so it can be displayed above everything else
-    document.body.appendChild(this.el.nativeElement);
-  }
+  constructor(private dialogRef: MatDialogRef<BudgetModalComponent>) { }
 
-  ngOnDestroy(): void {
-    // remove self from modal service
-    this.modalService.remove(this.id);
-
-    // remove modal element from html
-    this.element.remove();
-  }
-
-  open(): void {
-    this.element.style.display = 'block';
-    document.body.classList.add('pf-budget-modal-open');
-    document.body.style.overflow = 'hidden';
-    this.isOpen = true;
-  }
+   ngOnInit(): void {
+   }
 
   close() {
-    this.element.style.display = 'none';
-    document.body.classList.remove('pf-budget-modal-open');
-    document.body.style.overflow = 'auto';
-    this.isOpen = false;
+    this.dialogRef.close();
   }
 
   onSubmit() : void {
-    var newIncome: IIncome = {
-      incomeId: 5,
-      incomeName: this.newIncomeForm.controls["Income"].value,
-      incomeAmount: this.newIncomeForm.controls["Amount"].value
-    }
+    // null check on input fields
+    const incomeName = this.name.value === null ? '' : this.name.value;
+    const incomeAmount = this.amount.value === null ? 0 : this.amount.value;
 
-    this.newIncomeEvent.emit(newIncome);
-    this.newIncomeForm.reset();
-    this.close();
+    // instantitae object
+    var newIncome = new Income(incomeName, Number(incomeAmount));
+
+    this.dialogRef.close(newIncome);
+  }
+
+  getErrorMessage(): string {
+    return "You must enter a value";
   }
 }

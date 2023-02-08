@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ModalService } from '../../../services/modal/modal.service';
 import { BudgetService } from '../../../services/budget/budget.service';
-import { ExpenseCategory } from '../../../models/enums/expense-category';
-import { IExpense } from '../../../models/interfaces/expense';
+import { ExpenseCategory } from '../../../enums/expense-category';
+import { Expense } from '../../../models/expense.model';
 import {trigger, style, animate, transition} from '@angular/animations';
 
 
@@ -28,15 +28,15 @@ export class ExpenseComponent implements OnInit, OnDestroy {
    expenseCategoryArr: ExpenseCategory[] = [];
 
    // Expense related variables
-   expenses: IExpense[] = [];
+   expenses: Expense[] = [];
    totalExpense : number = 0;
    defaultTotalExpenseTitle: string = "Total Expense";
    expenseIsSelected: boolean = false;
    expenseCategoryIsSelected: boolean = false;
-   expenseArrByCategory: IExpense[] = [];
+   expenseArrByCategory: Expense[] = [];
 
    // Variable for child component of expense-detail
-   selectedExpense!: IExpense;
+   selectedExpense!: Expense;
 
   constructor(protected modalService: ModalService, private budgetService: BudgetService) {
         this.expenseCategoryArr = budgetService.getAllCategoryEnum();
@@ -71,7 +71,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     })
   }
 
-  displayExpenseDetail(expense: IExpense): void {
+  displayExpenseDetail(expense: Expense): void {
     this.selectedExpense = expense;
     this.expenseIsSelected = true;
     this.expenseCategoryIsSelected = false;

@@ -1,11 +1,17 @@
 import { PaymentType } from "../enums/payment-type";
 import { ExpenseCategory } from "../enums/expense-category";
 
-export interface IExpense {
-    id: number;
+export class Expense {
+    id!: number;
     location: string;
     amount: number;
     category?: ExpenseCategory;
     paymentType?: PaymentType;
-    date: Date
+    date: Date;
+
+    constructor(location: string, amount: number, date: Date) {
+        this.location = location;
+        this.amount = amount;
+        this.date = date;
+    }
 }
