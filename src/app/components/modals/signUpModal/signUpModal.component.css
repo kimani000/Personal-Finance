@@ -1,63 +1,12 @@
-.pf-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 85%);
-    padding: 40px;
-    overflow: hidden;
-
+.container{
+    display: flex;
+    flex-direction: column;
 }
 
-.pf-modal-body {
-    padding: 20px;
-    background-color: #6f90af;
-    margin: 25px auto;
-    width: 750px;
-    height: 575px;
-    border-radius: 10px;
-    padding-bottom: 0;
+.container > * {
+    width: 100%;
 }
 
-body.pf-modal-open {
-    overflow: hidden;
-}
-
-label {
-    font-size: x-large;
-    width: 200px;
-    margin: 15px 40px 0;
-    text-align: start;
-    color: white
-}
-
-input {
-    font-size: x-large;
-    width: 400px;
-    margin: 15px 0;
-    text-align: start;
-    line-height: 1.5em;
-    color: white;
-    background-color: transparent;
-    border: solid 1px white;
-    border-radius: 10px;
-}
-
-button {
-    border: none;
-    background-color: transparent;
-    color: white;
-}
-
-#signUpConfirmationButton {
-    background-color: #26272b;
-    color: white;
-    width: 150px;
-    margin-bottom: 4em;
-    border: solid #26272b;
-}
-
-#signUpConfirmationButton:hover {
-    background-color: white;
-    color: #3b71ca;
-    border: solid #3b71ca;
+mat-form-field {
+    margin-top: 10px;
 }

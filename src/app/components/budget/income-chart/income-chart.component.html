@@ -13,7 +13,7 @@
         </div>
 
         <div class="row float-end add-accordion-btn-row">
-            <button id="btnAddNew" (click)="addIncome('modal-2')" class="btn btn-primary rounded">
+            <button id="btnAddNew" (click)="addIncome()" class="btn btn-primary rounded">
                 <span id="addNewIcon" class="fa-solid fa-plus float-start"></span>Add
             </button>
         </div>
@@ -24,8 +24,11 @@
         <p class="display-5 border-bottom">{{defaultTotalIncomeTitle}}</p>
         <p class="display-5">{{totalIncome | currency: 'USD'}}</p>
     </div>
+<<<<<<< HEAD
+=======
 </div>
 
 <div *ngIf="modalIsDisplayed">    
     <pf-budget-modal id="modal-2" (newIncomeEvent)="addNewIncome($event)"></pf-budget-modal>
+>>>>>>> origin/master
 </div>

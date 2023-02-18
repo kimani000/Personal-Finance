@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BudgetService } from '../../../services/budget/budget.service';
-import { IExpense } from '../../../models/interfaces/expense';
+import { Expense } from '../../../models/expense.model';
 
 @Component({
   selector: 'pf-expense-detail',
@@ -10,7 +10,7 @@ import { IExpense } from '../../../models/interfaces/expense';
 })
 export class ExpenseDetailComponent {
 
-  @Input("selectedExpense") expense!: IExpense;
+  @Input("selectedExpense") expense!: Expense;
   @Output() expenseDetailEvent = new EventEmitter<boolean>();
   
 

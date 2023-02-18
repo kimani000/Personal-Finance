@@ -1,18 +1,24 @@
 @import '~normalize.css';
 
-* {
+/* * {
     font-family: serif;
-}
+} */
 
 .card {
     background-color: #6f90af ;
     border: none;
 }
+<<<<<<< HEAD
+/* If the below font were to be used, a lot of the sizing has to be readjusted */
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+=======
 
 html, body { height: 100%; }
 
 /* If the below font were to be used, a lot of the sizing has to be readjusted */
 
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+>>>>>>> origin/master
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

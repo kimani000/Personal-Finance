@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, filter, map, Observable, throwError } from 'rxjs';
-import { IIncome } from '../../models/interfaces/income';
-import { IExpense } from '../../models/interfaces/expense';
-import { ExpenseCategory } from '../../models/enums/expense-category';
+import { Income } from '../../models/income.models';
+import { Expense } from '../../models/expense.model';
+import { ExpenseCategory } from '../../enums/expense-category';
 import { DefaultUrlSerializer } from '@angular/router';
-import { PaymentType } from '../../models/enums/payment-type';
-import { IBudget } from 'src/app/models/interfaces/buget';
+import { PaymentType } from '../../enums/payment-type';
+import { Budget } from '../../models/buget.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +20,18 @@ export class BudgetService {
 
   constructor(private http: HttpClient) { }
 
-  getIncomes(): Observable<IIncome[]> {
-    return this.http.get<IIncome[]>(this.incomeUrl).pipe(
+  getIncomes(): Observable<Income[]> {
+    return this.http.get<Income[]>(this.incomeUrl).pipe(
       catchError(this.handleError)
     )
   };
 
-  getExpenses(): Observable<IExpense[]>{
-    return this.http.get<IExpense[]>(this.expenseUrl).pipe(
+  getExpenses(): Observable<Expense[]>{
+    return this.http.get<Expense[]>(this.expenseUrl).pipe(
       map(data => {
         // transform props that are supposed to be enum value
         for(let i = 0; i < data.length; i++) {
+          data[i].category = this.transformToExpenseCategoryType(data[i]);
           data[i].category = this.transformToExpenseCategoryType(data[i]);
           data[i].paymentType = this.transformToPaymentType(data[i]);
         }
@@ -40,8 +41,8 @@ export class BudgetService {
     )
   }
 
-  getBudgets(): Observable<IBudget[]>{
-    return this.http.get<IBudget[]>(this.budgetUrl).pipe(
+  getBudgets(): Observable<Budget[]>{
+    return this.http.get<Budget[]>(this.budgetUrl).pipe(
       map(data => {
         // transform prop to enum value
         for(let i = 0; i < data.length; i++) {
@@ -52,6 +53,8 @@ export class BudgetService {
       catchError(this.handleError)
     )
   }
+
+  
 
   // TODO: See if this actually works
   getAllCategoryEnum(): ExpenseCategory[] {
@@ -64,14 +67,17 @@ export class BudgetService {
 
     return enumArr;
   }
-  
-  // GETS one expense using id
-  // getExpenseById(id: number): Observable<IExpense>{
-  //   return this.http.get<IExpense>(this.expenseUrl).pipe(
-  //     filter(expense => (expense.id === id)),
-  //     catchError(this.handleError)
-  //   );
-  // }
+
+  getAllPaymentTypeEnum(): PaymentType[] {
+    var strEnumArr: string[] = Object.keys(PaymentType);
+    var enumArr: PaymentType[] = [];
+    
+    strEnumArr.forEach(enumVal => {
+      enumArr.push(PaymentType[enumVal as keyof typeof PaymentType]);
+    })
+
+    return enumArr;
+  }
   
   private handleError(err: HttpErrorResponse) {
     let errorMessgae = '';
@@ -85,8 +91,7 @@ export class BudgetService {
     return throwError(() => errorMessgae);
   }
 
-  private transformToExpenseCategoryType(paramObj: (IExpense | IBudget)): (ExpenseCategory | undefined) {
-    
+  private transformToExpenseCategoryType(paramObj: (Expense | Budget)): (ExpenseCategory | undefined) {   
     
     switch(paramObj.category){
       case 'Grocery':
@@ -104,7 +109,7 @@ export class BudgetService {
     }
   }
 
-  private transformToPaymentType(expense: IExpense): (PaymentType | undefined) {
+  private transformToPaymentType(expense: Expense): (PaymentType | undefined) {
     
     switch(expense.paymentType){
       case 'Cash':

@@ -4,7 +4,9 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/modal/modal.service';
 import { BudgetService } from '../../../services/budget/budget.service';
-import { IIncome } from '../../../models/interfaces/income';
+import { Income } from '../../../models/income.models';
+import { MatDialog } from '@angular/material/dialog';
+import { BudgetModalComponent } from '../../modals/budget-modal/budget-modal.component';
 
 @Component({
   selector: 'pf-income-chart',
@@ -16,7 +18,11 @@ export class IncomeChartComponent implements OnInit {
   errorMessage: string = '';
 
   // Doughnut chart/income related variables
+<<<<<<< HEAD
+  incomes: Income[] = [];
+=======
   incomes: IIncome[] = [];
+>>>>>>> origin/master
   totalIncome: number = 0;
   defaultTotalIncomeTitle: string = "Total Income";
 
@@ -36,11 +42,17 @@ export class IncomeChartComponent implements OnInit {
   @ViewChild(BaseChartDirective)
   chart!: BaseChartDirective;
 
+<<<<<<< HEAD
+  constructor(private budgetService: BudgetService, private dialog: MatDialog) {
+  }
+
+=======
   modalIsDisplayed = false;
 
   constructor(private budgetService: BudgetService, private modalService: ModalService) {
   }
 
+>>>>>>> origin/master
   // Lifecycle Hooks
   ngOnInit(): void {
     // GET incomes
@@ -49,6 +61,7 @@ export class IncomeChartComponent implements OnInit {
         this.incomes = income;
         this.getTotalIncomeLogged();
         this.initializeCharts();
+        this.updateChart();
       },
       error: err => this.errorMessage = err
     });
@@ -65,11 +78,14 @@ export class IncomeChartComponent implements OnInit {
 
   // Functions for income chart
   initializeCharts(): void {
-    this.incomes.forEach((income: IIncome) => {
+    this.incomes.forEach((income: Income) => {
       this.doughnutChartLabels.push(income.incomeName);
       this.doughnutChartData.datasets[0].data.push(income.incomeAmount);
     });
+<<<<<<< HEAD
+=======
     this.updateChart()
+>>>>>>> origin/master
   }
 
   updateChart(): void {
@@ -77,6 +93,21 @@ export class IncomeChartComponent implements OnInit {
   }
 
   // Functions for add new income functionality
+<<<<<<< HEAD
+  addIncome() {
+    let dialogRef = this.dialog.open(BudgetModalComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((data: Income) => {
+      this.incomes.push(data);
+      this.doughnutChartLabels.push(data.incomeName);
+      this.doughnutChartData.datasets[0].data.push(data.incomeAmount);
+      this.getTotalIncomeLogged();
+      this.updateChart();
+    });
+
+=======
   addIncome(id: string) {
     this.modalIsDisplayed = true;
     setTimeout(() => {
@@ -91,6 +122,7 @@ export class IncomeChartComponent implements OnInit {
       this.updateChart();
     } 
     this.modalIsDisplayed = false;
+>>>>>>> origin/master
   }
 
 }
