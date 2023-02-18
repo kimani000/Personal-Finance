@@ -11,11 +11,11 @@ import { ModalService } from '../../../services/modal/modal.service';
 })
 export class SignUpModalComponent {
 
-  firstName = new FormControl('', Validators.required);
-  lastName = new FormControl('', Validators.required);
-  email = new FormControl('', Validators.required);
-  password = new FormControl('', Validators.required);
-  confirmPassword = new FormControl('', Validators.required);
+  firstName = new FormControl('', { nonNullable: true});
+  lastName = new FormControl('', { nonNullable: true});
+  email = new FormControl('', { nonNullable: true});
+  password = new FormControl('', { nonNullable: true});
+  confirmPassword = new FormControl('', { nonNullable: true});
 
   constructor(private dialgRef: MatDialogRef<SignUpModalComponent>) { }
 
@@ -28,6 +28,9 @@ export class SignUpModalComponent {
   }
 
   submit(): void {
-    console.log("Hello");
+    // if form is valid
+    if (!this.firstName.invalid){
+      console.log("Hello");
+    }
   }
 }

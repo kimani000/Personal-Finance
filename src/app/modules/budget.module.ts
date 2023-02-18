@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgChartsModule } from 'ng2-charts';
 
@@ -13,13 +14,17 @@ import { BudgetModalComponent } from '../components/modals/budget-modal/budget-m
 import { ExpenseDetailComponent } from '../components/budget/expense-detail/expense-detail.component';
 import { IncomeChartComponent } from '../components/budget/income-chart/income-chart.component';
 import { ExpenseComponent } from '../components/budget/expense/expense.component';
+import { AddExpenseModalComponent } from '../components/modals/add-expense-modal/add-expense-modal.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'
+
 
 const routes: Routes = [
   { path: 'pfinance', pathMatch: 'prefix',
@@ -36,6 +41,7 @@ const routes: Routes = [
     ExpenseDetailComponent,
     ExpenseComponent,
     BudgetTableComponent,
+    AddExpenseModalComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +56,9 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     RouterModule.forChild(routes)
   ]
 })

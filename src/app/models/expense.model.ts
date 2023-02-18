@@ -9,7 +9,7 @@ export class Expense {
     paymentType?: PaymentType;
     date: Date;
 
-    constructor(location: string, amount: number, date: Date) {
+    constructor(location: string, amount: number, date: Date, category?:ExpenseCategory, paymentType?:PaymentType) {
         this.location = location;
         this.amount = amount;
         this.date = date;

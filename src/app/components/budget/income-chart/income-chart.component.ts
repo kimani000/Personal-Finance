@@ -49,6 +49,7 @@ export class IncomeChartComponent implements OnInit {
         this.incomes = income;
         this.getTotalIncomeLogged();
         this.initializeCharts();
+        this.updateChart();
       },
       error: err => this.errorMessage = err
     });

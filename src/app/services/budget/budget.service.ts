@@ -53,7 +53,6 @@ export class BudgetService {
     )
   }
 
-  // TODO: See if this actually works
   getAllCategoryEnum(): ExpenseCategory[] {
     var strEnumArr: string[] = Object.keys(ExpenseCategory);
     var enumArr: ExpenseCategory[] = [];
@@ -64,14 +63,17 @@ export class BudgetService {
 
     return enumArr;
   }
-  
-  // GETS one expense using id
-  // getExpenseById(id: number): Observable<IExpense>{
-  //   return this.http.get<IExpense>(this.expenseUrl).pipe(
-  //     filter(expense => (expense.id === id)),
-  //     catchError(this.handleError)
-  //   );
-  // }
+
+  getAllPaymentTypeEnum(): PaymentType[] {
+    var strEnumArr: string[] = Object.keys(PaymentType);
+    var enumArr: PaymentType[] = [];
+    
+    strEnumArr.forEach(enumVal => {
+      enumArr.push(PaymentType[enumVal as keyof typeof PaymentType]);
+    })
+
+    return enumArr;
+  }
   
   private handleError(err: HttpErrorResponse) {
     let errorMessgae = '';
@@ -85,8 +87,7 @@ export class BudgetService {
     return throwError(() => errorMessgae);
   }
 
-  private transformToExpenseCategoryType(paramObj: (Expense | Budget)): (ExpenseCategory | undefined) {
-    
+  private transformToExpenseCategoryType(paramObj: (Expense | Budget)): (ExpenseCategory | undefined) {   
     
     switch(paramObj.category){
       case 'Grocery':

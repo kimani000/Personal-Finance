@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Income } from '../../../models/income.models';
 
@@ -8,30 +8,39 @@ import { Income } from '../../../models/income.models';
   templateUrl: './budget-modal.component.html',
   styleUrls: ['./budget-modal.component.css']
 })
-export class BudgetModalComponent implements OnInit{
+export class BudgetModalComponent implements OnInit {
+  
+  newIncomeForm: FormGroup;
 
-  name = new FormControl('', Validators.required);
-  amount = new FormControl('', Validators.required);
+  constructor(private dialogRef: MatDialogRef<BudgetModalComponent>,
+              private fb: FormBuilder) {
 
+                this.newIncomeForm = this.fb.group({
+                  name: new FormControl<string>('', Validators.required),
+                  amount: new FormControl<number | null>(null, Validators.required)
+                })
+               }
 
-  constructor(private dialogRef: MatDialogRef<BudgetModalComponent>) { }
-
-   ngOnInit(): void {
-   }
+  ngOnInit(): void {
+  }
 
   close() {
     this.dialogRef.close();
   }
 
-  onSubmit() : void {
-    // null check on input fields
-    const incomeName = this.name.value === null ? '' : this.name.value;
-    const incomeAmount = this.amount.value === null ? 0 : this.amount.value;
+  onSubmit(): void {
 
-    // instantitae object
-    var newIncome = new Income(incomeName, Number(incomeAmount));
+    switch(this.newIncomeForm.valid){
+      
+      case true:
+        var formValue = this.newIncomeForm.getRawValue();
+        var newIncome = new Income(formValue.name, Number(formValue.amount));
+        this.dialogRef.close(newIncome);
+        break;
 
-    this.dialogRef.close(newIncome);
+      default:
+        break;
+    }
   }
 
   getErrorMessage(): string {
