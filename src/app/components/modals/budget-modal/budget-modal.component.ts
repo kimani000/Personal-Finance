@@ -24,8 +24,17 @@ export class BudgetModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+<<<<<<< HEAD
   close() {
     this.dialogRef.close();
+=======
+  ngOnDestroy(): void {
+    // remove self from modal service
+    this.modalService.remove(this.id);
+
+    // remove modal element from html
+    this.element.remove();
+>>>>>>> origin/master
   }
 
   onSubmit(): void {

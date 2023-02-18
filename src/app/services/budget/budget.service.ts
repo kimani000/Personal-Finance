@@ -32,6 +32,7 @@ export class BudgetService {
         // transform props that are supposed to be enum value
         for(let i = 0; i < data.length; i++) {
           data[i].category = this.transformToExpenseCategoryType(data[i]);
+          data[i].category = this.transformToExpenseCategoryType(data[i]);
           data[i].paymentType = this.transformToPaymentType(data[i]);
         }
         return data;
@@ -53,6 +54,9 @@ export class BudgetService {
     )
   }
 
+  
+
+  // TODO: See if this actually works
   getAllCategoryEnum(): ExpenseCategory[] {
     var strEnumArr: string[] = Object.keys(ExpenseCategory);
     var enumArr: ExpenseCategory[] = [];
