@@ -9,15 +9,12 @@ import { HomeComponent } from './components/home/home.component';
 import { SignUpModalComponent } from './components/modals/signUpModal/signUpModal.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BudgetTableActionModalComponent } from './components/modals/budget-table-action-modal/budget-table-action-modal.component';
-<<<<<<< HEAD
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-=======
->>>>>>> origin/master
 
 
 @NgModule({

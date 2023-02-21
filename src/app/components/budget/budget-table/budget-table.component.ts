@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-<<<<<<< HEAD
 import { Budget } from '../../../models/buget.model';
-=======
-import { IBudget } from 'src/app/models/interfaces/buget';
->>>>>>> origin/master
 import { BudgetService } from 'src/app/services/budget/budget.service';
 import { ModalService } from 'src/app/services/modal/modal.service';
 
@@ -20,11 +16,7 @@ export class BudgetTableComponent implements OnInit {
 
   // budget data variables
   displayedColumns: string[] = ['id', 'name', 'category', 'projectedCost', 'actualCost', 'difference', 'actions'];
-<<<<<<< HEAD
   budgetData: Budget[] = [];
-=======
-  budgetData: IBudget[] = [];
->>>>>>> origin/master
 
   // modal variables
   modalIsDisplayed = false;

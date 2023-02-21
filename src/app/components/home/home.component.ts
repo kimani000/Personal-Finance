@@ -14,17 +14,9 @@ export class HomeComponent {
 
   constructor(protected modalService: ModalService, private dialog: MatDialog) {}
 
-<<<<<<< HEAD
   openSignUpModal(): void{
     let dialgRef = this.dialog.open(SignUpModalComponent, {
       width: '500px',
     })
-=======
-  openSignUpModal(id: string): void{
-    this.modalIsDisplayed = true;
-    setTimeout(() => {
-      this.modalService.open(id);
-    }, 100);
->>>>>>> origin/master
   }
 }

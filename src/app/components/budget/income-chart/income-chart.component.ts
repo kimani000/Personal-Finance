@@ -18,11 +18,7 @@ export class IncomeChartComponent implements OnInit {
   errorMessage: string = '';
 
   // Doughnut chart/income related variables
-<<<<<<< HEAD
   incomes: Income[] = [];
-=======
-  incomes: IIncome[] = [];
->>>>>>> origin/master
   totalIncome: number = 0;
   defaultTotalIncomeTitle: string = "Total Income";
 
@@ -42,17 +38,9 @@ export class IncomeChartComponent implements OnInit {
   @ViewChild(BaseChartDirective)
   chart!: BaseChartDirective;
 
-<<<<<<< HEAD
   constructor(private budgetService: BudgetService, private dialog: MatDialog) {
   }
 
-=======
-  modalIsDisplayed = false;
-
-  constructor(private budgetService: BudgetService, private modalService: ModalService) {
-  }
-
->>>>>>> origin/master
   // Lifecycle Hooks
   ngOnInit(): void {
     // GET incomes
@@ -82,18 +70,12 @@ export class IncomeChartComponent implements OnInit {
       this.doughnutChartLabels.push(income.incomeName);
       this.doughnutChartData.datasets[0].data.push(income.incomeAmount);
     });
-<<<<<<< HEAD
-=======
-    this.updateChart()
->>>>>>> origin/master
   }
-
   updateChart(): void {
     this.chart.chart?.update();
   }
 
   // Functions for add new income functionality
-<<<<<<< HEAD
   addIncome() {
     let dialogRef = this.dialog.open(BudgetModalComponent, {
       width: '500px'
@@ -106,23 +88,6 @@ export class IncomeChartComponent implements OnInit {
       this.getTotalIncomeLogged();
       this.updateChart();
     });
-
-=======
-  addIncome(id: string) {
-    this.modalIsDisplayed = true;
-    setTimeout(() => {
-      this.modalService.open(id);
-    }, 100);
-  }
-
-  addNewIncome(event: IIncome) {
-    if (event.incomeName !== null && event.incomeAmount !== null) {
-      this.doughnutChartLabels.push(event.incomeName);
-      this.doughnutChartData.datasets[0].data.push(event.incomeAmount);
-      this.updateChart();
-    } 
-    this.modalIsDisplayed = false;
->>>>>>> origin/master
   }
 
 }
