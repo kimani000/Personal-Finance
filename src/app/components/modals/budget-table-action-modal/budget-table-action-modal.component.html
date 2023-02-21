@@ -1,19 +1,44 @@
-<div class="pf-budget-table-action-modal">
-    <div class="pf-budget-table-action-modal-body">
-        <div class="d-flex justify-content-end mb-3">
-            <p class="display-4 text-white" style="padding-right: 25px;"><em>Add New Budget!</em>
-            </p>
-            <div class="flex-shrink-0">
-                <button (click)="close()" class="btn btn-lg">x</button>
-            </div>
+<!-- Add New Budget Modal-->
+<h1 class="text-center my-1" mat-dialog-title
+    style="font-size: x-large;">{{ pageTitle }}</h1>
+
+<mat-dialog-content>
+    <form class="container" [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+
+        <div *ngIf="isEditBudget">            
+            <input formControlName="id" [hidden]="true">
         </div>
+
         <mat-form-field appearance="fill">
-            <mat-label>Input</mat-label>
-            <input matInput>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Textarea</mat-label>
-            <textarea matInput></textarea>
-          </mat-form-field>
-    </div>
-</div>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="budgetForm.controls['name'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="expenseCategoryArr">
+            <mat-label>Select Expense Category...</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of expenseCategoryArr; let i = index" 
+                    [id]="i.toString()" [value]="category">{{ category }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="budgetForm.controls['category'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Projected Cost</mat-label>
+            <input matInput formControlName="projectedCost" type="number" min="0">
+            <mat-error *ngIf="budgetForm.controls['projectedCost'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Actual Cost</mat-label>
+            <input matInput formControlName="actualCost" type="number" min="0">
+            <mat-error *ngIf="budgetForm.controls['actualCost'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <div class="d-flex justify-content-between mt-2">
+            <button mat-button color="primary" (click)="close()">Close</button>
+            <button mat-button color="primary" type="submit">Submit</button>
+        </div>
+    </form>
+</mat-dialog-content>
