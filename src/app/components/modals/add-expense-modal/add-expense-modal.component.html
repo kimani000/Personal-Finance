@@ -5,7 +5,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Location</mat-label>
-            <input matInput formControlName="location" #location>
+            <input matInput formControlName="location">
             <mat-error *ngIf="addExpenseFrom.controls['location'].invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
 

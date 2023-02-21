@@ -1,79 +1,12 @@
-.pf-budget-table-action-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 85%);
-    padding: 40px;
-    overflow: hidden;
-
+.container{
+    display: flex;
+    flex-direction: column;
 }
 
-.pf-budget-table-action-modal-body {
-    padding: 20px;
-    background-color: #6f90af;
-    margin: 25px auto;
-    width: 600px;
-    height: 350px;
-    border-radius: 10px;
-    padding-bottom: 0 !important;
+.container > * {
+    width: 100%;
 }
 
-body.pf-budget-table-action-modal-open {
-    overflow: hidden;
-}
-
-label {
-    font-size: x-large;
-    width: 100px;
-    margin: 15px 25px;
-    text-align: start;
-    color: white
-}
-
-#amountLabel {
-    font-size: x-large;
-    width: 100px;
-    margin: 15px 15px;
-    padding-left: 5.5px;
-    text-align: start;
-    color: white
-}
-
-input {
-    font-size: x-large;
-    width: 400px;
-    margin: 15px 0;
-    text-align: start;
-    line-height: 1.5em;
-    color: white;
-    background-color: transparent;
-    border: solid 1px white;
-    border-radius: 10px;
-}
-
-button {
-    border: none;
-    background-color: transparent;
-    color: white;
-}
-
-#cancelAddIncomeBtn, #confirmAddIncomeBtn {
-    background-color: #26272b;
-    color: white;
-    width: 150px;
-    margin-bottom: 4em;
-    border: solid #26272b;
-}
-
-#cancelAddIncomeBtn:hover, #confirmAddIncomeBtn:hover {
-    background-color: white;
-    color: #3b71ca;
-    border: solid #3b71ca;
-}
-
-span {
-    padding-top: 19px;
-    padding-right: 10px;
-    font-size: x-large;
-    color: white;
+mat-form-field {
+    margin-top: 10px;
 }

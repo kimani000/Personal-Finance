@@ -43,9 +43,14 @@ export class BudgetService {
   getBudgets(): Observable<Budget[]>{
     return this.http.get<Budget[]>(this.budgetUrl).pipe(
       map(data => {
-        // transform prop to enum value
+        /**
+         * Transform enum 
+         * AND 
+         * calculate difference between projected cost and actual cost
+         */
         for(let i = 0; i < data.length; i++) {
           data[i].category = this.transformToExpenseCategoryType(data[i]);
+          data[i].difference = data[i].projectedCost - data[i].actualCost;
         }
         return data;
       }),
@@ -53,10 +58,7 @@ export class BudgetService {
     )
   }
 
-  
-
-  // TODO: See if this actually works
-  getAllCategoryEnum(): ExpenseCategory[] {
+    getAllCategoryEnum(): ExpenseCategory[] {
     var strEnumArr: string[] = Object.keys(ExpenseCategory);
     var enumArr: ExpenseCategory[] = [];
     
