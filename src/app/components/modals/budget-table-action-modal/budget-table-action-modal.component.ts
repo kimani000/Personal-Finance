@@ -46,7 +46,7 @@ export class BudgetTableActionModalComponent implements OnInit {
     // Change title of the dialog depending on action passed in
     if (this.isAddNewBudget) this.pageTitle = `${this.action} New Budget`;
     else if (this.isEditBudget) this.pageTitle = `${this.action} Selected Budget`;
-    else this.pageTitle = "Are You Sure You Want To Delete?";
+    else this.pageTitle = "Are You Sure You Want To Delete";
 
     // Change default value of projectedCost and actualCost (formControl) to null if the user is adding a new budget
     switch (this.isAddNewBudget) {
@@ -65,24 +65,24 @@ export class BudgetTableActionModalComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.budgetForm.valid) {
-      let outputData;
-      let formValue = this.budgetForm.getRawValue();
-      let budget: Budget = new Budget(formValue.name, formValue.projectedCost, formValue.actualCost, formValue.category);
+    let outputData;
 
-      if (this.isEditBudget) budget.id = formValue.id;
+    switch (this.isAddNewBudget || this.isEditBudget) {
+      case true:
+        if (this.budgetForm.valid) {
+          let formValue = this.budgetForm.getRawValue();
+          let budget: Budget = new Budget(formValue.name, formValue.projectedCost, formValue.actualCost, formValue.category);
 
-      switch (this.isAddNewBudget || this.isEditBudget) {
-        case true:
+          if (this.isEditBudget) budget.id = formValue.id;
           outputData = { budgetObj: budget, action: this.action };
-          break;
+        }
+        break;
 
-        case false:
-          // if false send the id of selected budget and action back to the parent component
-          break;
-      }
-      this.dialogRef.close(outputData);
+      case false:
+        outputData = {budgetObj: this.selectedBudget, action: this.action};
+        break;
     }
+    this.dialogRef.close(outputData);
   }
 
   getErrorMessage(): string {

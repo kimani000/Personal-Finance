@@ -1,44 +1,62 @@
 <!-- Add New Budget Modal-->
-<h1 class="text-center my-1" mat-dialog-title
-    style="font-size: x-large;">{{ pageTitle }}</h1>
+<h1 class="text-center my-1" mat-dialog-title style="font-size: x-large;">{{ pageTitle }}</h1>
 
 <mat-dialog-content>
-    <form class="container" [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+    <!-- If User Wants to Add or Edit a Budget-->
+    <div *ngIf="isAddNewBudget || isEditBudget">
+        <form class="container" [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
 
-        <div *ngIf="isEditBudget">            
-            <input formControlName="id" [hidden]="true">
-        </div>
+            <div *ngIf="isEditBudget">
+                <input formControlName="id" [hidden]="true">
+            </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name">
-            <mat-error *ngIf="budgetForm.controls['name'].invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="budgetForm.controls['name'].invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="fill" *ngIf="expenseCategoryArr">
-            <mat-label>Select Expense Category...</mat-label>
-            <mat-select formControlName="category">
-                <mat-option *ngFor="let category of expenseCategoryArr; let i = index" 
-                    [id]="i.toString()" [value]="category">{{ category }}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="budgetForm.controls['category'].invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="expenseCategoryArr">
+                <mat-label>Select Expense Category...</mat-label>
+                <mat-select formControlName="category">
+                    <mat-option *ngFor="let category of expenseCategoryArr; let i = index" [id]="i.toString()"
+                        [value]="category">{{ category }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="budgetForm.controls['category'].invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Projected Cost</mat-label>
-            <input matInput formControlName="projectedCost" type="number" min="0">
-            <mat-error *ngIf="budgetForm.controls['projectedCost'].invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Projected Cost</mat-label>
+                <input matInput formControlName="projectedCost" type="number" min="0">
+                <mat-error *ngIf="budgetForm.controls['projectedCost'].invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Actual Cost</mat-label>
-            <input matInput formControlName="actualCost" type="number" min="0">
-            <mat-error *ngIf="budgetForm.controls['actualCost'].invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Actual Cost</mat-label>
+                <input matInput formControlName="actualCost" type="number" min="0">
+                <mat-error *ngIf="budgetForm.controls['actualCost'].invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
 
-        <div class="d-flex justify-content-between mt-2">
-            <button mat-button color="primary" (click)="close()">Close</button>
-            <button mat-button color="primary" type="submit">Submit</button>
-        </div>
-    </form>
+            <div class="d-flex justify-content-between mt-2">
+                <button mat-button color="primary" (click)="close()">Close</button>
+                <button mat-button color="primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- If User Wants to Delete a Budget-->
+    <div *ngIf="!isAddNewBudget && !isEditBudget">
+        <form class="container" (ngSubmit)="onSubmit()">
+            <div class="text-center">
+                <h2 class="my-3" style="font-size: xx-large;">
+                    {{ selectedBudget.name }}
+                </h2>
+                <h2 class="mt-4" style="font-size: x-large">from your budget?</h2>
+            </div>
+            <div class="d-flex justify-content-around mt-3">
+                <button mat-button color="primary" (click)="close()">Close</button>
+                <button mat-button color="primary" type="submit">Delete</button>
+            </div>
+        </form>
+    </div>
 </mat-dialog-content>
