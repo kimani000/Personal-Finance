@@ -4,7 +4,9 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/modal/modal.service';
 import { BudgetService } from '../../../services/budget/budget.service';
-import { IIncome } from '../../../models/interfaces/income';
+import { Income } from '../../../models/income.models';
+import { MatDialog } from '@angular/material/dialog';
+import { BudgetModalComponent } from '../../modals/budget-modal/budget-modal.component';
 
 @Component({
   selector: 'pf-income-chart',
@@ -16,7 +18,7 @@ export class IncomeChartComponent implements OnInit {
   errorMessage: string = '';
 
   // Doughnut chart/income related variables
-  incomes: IIncome[] = [];
+  incomes: Income[] = [];
   totalIncome: number = 0;
   defaultTotalIncomeTitle: string = "Total Income";
 
@@ -36,9 +38,7 @@ export class IncomeChartComponent implements OnInit {
   @ViewChild(BaseChartDirective)
   chart!: BaseChartDirective;
 
-  modalIsDisplayed = false;
-
-  constructor(private budgetService: BudgetService, private modalService: ModalService) {
+  constructor(private budgetService: BudgetService, private dialog: MatDialog) {
   }
 
   // Lifecycle Hooks
@@ -49,6 +49,7 @@ export class IncomeChartComponent implements OnInit {
         this.incomes = income;
         this.getTotalIncomeLogged();
         this.initializeCharts();
+        this.updateChart();
       },
       error: err => this.errorMessage = err
     });
@@ -65,32 +66,29 @@ export class IncomeChartComponent implements OnInit {
 
   // Functions for income chart
   initializeCharts(): void {
-    this.incomes.forEach((income: IIncome) => {
+    this.incomes.forEach((income: Income) => {
       this.doughnutChartLabels.push(income.incomeName);
       this.doughnutChartData.datasets[0].data.push(income.incomeAmount);
     });
     this.updateChart()
   }
-
   updateChart(): void {
     this.chart.chart?.update();
   }
 
   // Functions for add new income functionality
-  addIncome(id: string) {
-    this.modalIsDisplayed = true;
-    setTimeout(() => {
-      this.modalService.open(id);
-    }, 100);
-  }
+  addIncome() {
+    let dialogRef = this.dialog.open(BudgetModalComponent, {
+      width: '500px'
+    });
 
-  addNewIncome(event: IIncome) {
-    if (event.incomeName !== null && event.incomeAmount !== null) {
-      this.doughnutChartLabels.push(event.incomeName);
-      this.doughnutChartData.datasets[0].data.push(event.incomeAmount);
+    dialogRef.afterClosed().subscribe((data: Income) => {
+      this.incomes.push(data);
+      this.doughnutChartLabels.push(data.incomeName);
+      this.doughnutChartData.datasets[0].data.push(data.incomeAmount);
+      this.getTotalIncomeLogged();
       this.updateChart();
-    } 
-    this.modalIsDisplayed = false;
+    });
   }
 
 }

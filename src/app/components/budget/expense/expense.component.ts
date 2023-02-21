@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ModalService } from '../../../services/modal/modal.service';
 import { BudgetService } from '../../../services/budget/budget.service';
-import { ExpenseCategory } from '../../../models/enums/expense-category';
-import { IExpense } from '../../../models/interfaces/expense';
+import { ExpenseCategory } from '../../../enums/expense-category';
+import { Expense } from '../../../models/expense.model';
 import {trigger, style, animate, transition} from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { AddExpenseModalComponent } from '../../modals/add-expense-modal/add-expense-modal.component';
 
 
 @Component({
@@ -28,17 +30,17 @@ export class ExpenseComponent implements OnInit, OnDestroy {
    expenseCategoryArr: ExpenseCategory[] = [];
 
    // Expense related variables
-   expenses: IExpense[] = [];
+   expenses: Expense[] = [];
    totalExpense : number = 0;
    defaultTotalExpenseTitle: string = "Total Expense";
    expenseIsSelected: boolean = false;
    expenseCategoryIsSelected: boolean = false;
-   expenseArrByCategory: IExpense[] = [];
+   expenseArrByCategory: Expense[] = [];
 
    // Variable for child component of expense-detail
-   selectedExpense!: IExpense;
+   selectedExpense!: Expense;
 
-  constructor(protected modalService: ModalService, private budgetService: BudgetService) {
+  constructor(private dialog: MatDialog, private budgetService: BudgetService) {
         this.expenseCategoryArr = budgetService.getAllCategoryEnum();
       }
 
@@ -63,6 +65,13 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.totalExpense += this.expenses.reduce((sum, expense) => sum + expense.amount, 0);
   }
 
+  // Add new expense
+  AddNewExpense(): void {
+    let dialogRef = this.dialog.open(AddExpenseModalComponent,{
+      width: "500px"
+    })
+  }
+
   // Functions for expenses
   displaySpendingInCategory(expenseCategory: ExpenseCategory): void{
     this.expenseCategoryIsSelected = true;
@@ -71,7 +80,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     })
   }
 
-  displayExpenseDetail(expense: IExpense): void {
+  displayExpenseDetail(expense: Expense): void {
     this.selectedExpense = expense;
     this.expenseIsSelected = true;
     this.expenseCategoryIsSelected = false;

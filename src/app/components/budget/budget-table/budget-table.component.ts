@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IBudget } from 'src/app/models/interfaces/buget';
+import { Budget } from '../../../models/buget.model';
 import { BudgetService } from 'src/app/services/budget/budget.service';
 import { ModalService } from 'src/app/services/modal/modal.service';
 
@@ -16,11 +16,10 @@ export class BudgetTableComponent implements OnInit {
 
   // budget data variables
   displayedColumns: string[] = ['id', 'name', 'category', 'projectedCost', 'actualCost', 'difference', 'actions'];
-  budgetData: IBudget[] = [];
+  budgetData: Budget[] = [];
 
   // modal variables
   modalIsDisplayed = false;
-  modalAction!: ('add' | 'edit' | 'delete');
 
   // ctor
   constructor(private budgetService: BudgetService, private modalService: ModalService){
@@ -43,19 +42,18 @@ export class BudgetTableComponent implements OnInit {
     })
   }
 
-  AddEditDeleteBudgetModal(action: ('add' | 'edit' | 'delete'), id: string): void {
-    this.modalIsDisplayed = true;
-    this.modalAction = action;
+  budgetTableAction(action: string, id: string): void {
     
+    /** TODO:
+     * Modal component for this action has been created.
+     * Next thing to do is figure out if I can recycle the same modal for edit and delete.
+     * 
+     */
+    this.modalIsDisplayed = true;
     setTimeout(() => {
-      switch (action) {
-        case 'edit':
-          this.modalService.open('modal-3');
-          break;
-        case 'delete':
-          this.modalService.open('modal-3');
-          break;
-      }
+      this.modalService.open(id);
     }, 100);
+
+    // if(action === 'edit' || action === 'delete') this.modalService.open('modal-3');
   }
 }

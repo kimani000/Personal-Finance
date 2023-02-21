@@ -1,0 +1,50 @@
+<h1 class="text-center my-1" mat-dialog-title style="font-size: x-large;">Add New Expense!</h1>
+
+<mat-dialog-content>
+    <form class="container" [formGroup]="addExpenseFrom" (ngSubmit)="submit()">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Location</mat-label>
+            <input matInput formControlName="location" #location>
+            <mat-error *ngIf="addExpenseFrom.controls['location'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input type="number" min="0" matInput formControlName="amount">
+            <mat-error *ngIf="addExpenseFrom.controls['amount'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="expenseCategoryArr">
+            <mat-label>Select Expense Category...</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of expenseCategoryArr; let i = index" 
+                    [id]="i.toString()" [value]="category">{{ category }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addExpenseFrom.controls['category'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="expenseCategoryArr">
+            <mat-label>Select Payment Type...</mat-label>
+            <mat-select formControlName="paymentType">
+                <mat-option *ngFor="let paymentType of paymentTypeArr; let i = index" 
+                    [id]="i.toString()" [value]="paymentType">{{ paymentType }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addExpenseFrom.controls['paymentType'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="addExpenseFrom.controls['date'].invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          
+          <div class="d-flex justify-content-between mt-2">
+            <button mat-button color="primary" (click)="close()">Close</button>
+            <button mat-button color="primary" type="submit">Submit</button>
+        </div>
+    </form>
+    
+</mat-dialog-content>

@@ -44,9 +44,9 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-button><i class="fa-solid fa-pen" (click)="AddEditDeleteBudgetModal('edit', 'modal-3')"></i></button>
+                    <button mat-button><i class="fa-solid fa-pen" (click)="budgetTableAction('edit', 'modal-3')"></i></button>
                     |
-                    <button mat-button><i class="fa-solid fa-xmark" (click)="AddEditDeleteBudgetModal('delete', 'modal-3')"></i></button>
+                    <button mat-button><i class="fa-solid fa-xmark" (click)="budgetTableAction('delete', 'modal-3')"></i></button>
                 </td>
             </ng-container>
 
@@ -65,9 +65,4 @@
     <div class="col-md-4 text-center pt-4 my-auto pt-2">
         <!-- TODO: Figure out what goes here-->
     </div>
-</div>
-
-<!-- modal -->
-<div *ngIf="modalIsDisplayed">
-    <pf-budget-table-action-modal id="modal-3" [action]="modalAction"></pf-budget-table-action-modal>
 </div>

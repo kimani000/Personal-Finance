@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalService } from '../../services/modal/modal.service';
+import { SignUpModalComponent } from '../modals/signUpModal/signUpModal.component';
 
 @Component({
   templateUrl: './home.component.html',
@@ -8,14 +10,12 @@ import { ModalService } from '../../services/modal/modal.service';
 export class HomeComponent {
 
   title: string = 'Home Page';
-  modalIsDisplayed = false;
 
-  constructor(protected modalService: ModalService) {}
+  constructor(protected modalService: ModalService, private dialog: MatDialog) {}
 
-  openSignUpModal(id: string): void{
-    this.modalIsDisplayed = true;
-    setTimeout(() => {
-      this.modalService.open(id);
-    }, 100);
+  openSignUpModal(): void{
+    let dialgRef = this.dialog.open(SignUpModalComponent, {
+      width: '500px',
+    })
   }
 }
