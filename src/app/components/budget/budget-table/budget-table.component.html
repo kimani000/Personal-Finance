@@ -53,15 +53,16 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <div class="row float-end add-btn-row">
+            <button id="btnAddNew" (click)="AddEditDeleteBudgetModal('add', 'modal-3')" class="btn btn-primary rounded">
+                <span id="addNewIcon" class="fa-solid fa-plus float-start"></span>Add
+            </button>
+        </div>
     </div>
 
     <!-- Right Column-->
     <div class="col-md-4 text-center pt-4 my-auto pt-2">
         <!-- TODO: Figure out what goes here-->
     </div>
-</div>
-
-<!-- modal -->
-<div *ngIf="modalIsDisplayed">
-    <pf-budget-modal id="modal-3"></pf-budget-modal>
 </div>

@@ -10,7 +10,6 @@ import { SignUpModalComponent } from '../modals/signUpModal/signUpModal.componen
 export class HomeComponent {
 
   title: string = 'Home Page';
-  modalIsDisplayed = false;
 
   constructor(protected modalService: ModalService, private dialog: MatDialog) {}
 

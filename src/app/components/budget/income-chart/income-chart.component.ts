@@ -70,6 +70,7 @@ export class IncomeChartComponent implements OnInit {
       this.doughnutChartLabels.push(income.incomeName);
       this.doughnutChartData.datasets[0].data.push(income.incomeAmount);
     });
+    this.updateChart()
   }
   updateChart(): void {
     this.chart.chart?.update();

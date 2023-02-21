@@ -17,14 +17,15 @@ import { ExpenseComponent } from '../components/budget/expense/expense.component
 import { AddExpenseModalComponent } from '../components/modals/add-expense-modal/add-expense-modal.component';
 
 import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'
 
+import { BudgetTableActionModalComponent } from '../components/modals/budget-table-action-modal/budget-table-action-modal.component';
 
 const routes: Routes = [
   { path: 'pfinance', pathMatch: 'prefix',
@@ -41,6 +42,7 @@ const routes: Routes = [
     ExpenseDetailComponent,
     ExpenseComponent,
     BudgetTableComponent,
+    BudgetTableActionModalComponent,
     AddExpenseModalComponent,
   ],
   imports: [

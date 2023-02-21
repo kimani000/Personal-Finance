@@ -1,1 +1,19 @@
-<p>budget-table-action-modal works!</p>
+<div class="pf-budget-table-action-modal">
+    <div class="pf-budget-table-action-modal-body">
+        <div class="d-flex justify-content-end mb-3">
+            <p class="display-4 text-white" style="padding-right: 25px;"><em>Add New Budget!</em>
+            </p>
+            <div class="flex-shrink-0">
+                <button (click)="close()" class="btn btn-lg">x</button>
+            </div>
+        </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Input</mat-label>
+            <input matInput>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Textarea</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+    </div>
+</div>
