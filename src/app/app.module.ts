@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignUpModalComponent } from './components/modals/signUpModal/signUpModal.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BudgetTableActionModalComponent } from './components/modals/budget-table-action-modal/budget-table-action-modal.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,7 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     HomeComponent,
     SignUpModalComponent,
-    BudgetTableActionModalComponent,
   ],
   imports: [
     CommonModule,
