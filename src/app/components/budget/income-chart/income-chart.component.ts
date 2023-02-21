@@ -59,9 +59,17 @@ export class IncomeChartComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  // Initalize total income variable
-  getTotalIncomeLogged(): void {
-    this.totalIncome += this.incomes.reduce((sum, income) => sum + income.incomeAmount, 0);
+  /**
+   * With no parameter, this function calculates the total income logged
+   * With a parameter, this function adds the new income to the total.
+   */
+  getTotalIncomeLogged(newIncomeAmount?: number): void {
+    if (newIncomeAmount){
+      this.totalIncome += newIncomeAmount;
+    }
+    else{
+      this.totalIncome += this.incomes.reduce((sum, income) => sum + income.incomeAmount, 0);
+    }
   }
 
   // Functions for income chart
@@ -72,6 +80,7 @@ export class IncomeChartComponent implements OnInit {
     });
     this.updateChart()
   }
+  
   updateChart(): void {
     this.chart.chart?.update();
   }
@@ -86,7 +95,7 @@ export class IncomeChartComponent implements OnInit {
       this.incomes.push(data);
       this.doughnutChartLabels.push(data.incomeName);
       this.doughnutChartData.datasets[0].data.push(data.incomeAmount);
-      this.getTotalIncomeLogged();
+      this.getTotalIncomeLogged(data.incomeAmount);
       this.updateChart();
     });
   }
