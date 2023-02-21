@@ -1,13 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Budget } from '../../../models/buget.model';
 import { BudgetService } from 'src/app/services/budget/budget.service';
-import { ModalService } from 'src/app/services/modal/modal.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BudgetTableActionModalComponent } from '../../modals/budget-table-action-modal/budget-table-action-modal.component';
+import { MatTable } from '@angular/material/table';
 import { IBudget } from 'src/app/models/interfaces/buget.interface';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'pf-budget-table',
@@ -27,8 +25,8 @@ export class BudgetTableComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<any>;
 
   // ctor
-  constructor(private budgetService: BudgetService, 
-    private dialog: MatDialog){
+  constructor(private budgetService: BudgetService,
+    private dialog: MatDialog) {
   }
 
   // lifecycle hooks
@@ -36,17 +34,18 @@ export class BudgetTableComponent implements OnInit {
     this.sub = this.budgetService.getBudgets().subscribe({
       next: budget => {
         this.budgetData = budget;
-      } 
+      }
     })
   }
-  // function that handles add, edit, and delete
-  // launches MatDialog
+
+  /**  
+   * function that handles add, edit, and delete.
+   * also launches MatDialog */
   budgetTableAction(action: ("Add" | "Edit" | "Delete"), budget?: Budget): void {
     let budgetObj: Budget;
-
     /**
-     * if user selected edit or delete, set the selected budget to vairable
-     * if user selects add, create a new instance of Budget
+     * if the user selects edit or delete, set the selected budget to vairable
+     * if the user selects add, create a new instance of Budget
      */
     if (budget) budgetObj = budget;
     else budgetObj = Budget.createNewBudget();
@@ -60,22 +59,22 @@ export class BudgetTableComponent implements OnInit {
     }
     dialogConfig.width = '500px';
 
-    let dialogRef = this.dialog.open(BudgetTableActionModalComponent, dialogConfig).afterClosed().subscribe(response => {
+    let dialogRef = this.dialog.open(BudgetTableActionModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(response => {
       /**
        * TODO:
        * Implement add, edit, delete to reflect in BudgetService
        */
-      switch(response.action){
+      switch (response.action) {
         case "Add":
-          response.budgetObj.id = this.budgetData.length + 1;
-          this.budgetData.push(response.budgetObj);
+          this.AddNewBudget(response.budgetObj);
           break;
         case "Edit":
-          let index = this.budgetData.findIndex(budget => budget.id === response.budgetObj.id)
-          this.budgetData[index] = response.budgetObj;
+          this.EditSelectedBudget(response.budgetObj);
           break;
         case "Delete":
-          // Needs to be implemented
+          this.DeleteSelectedBudget(response.budgetObj.id)
           break;
       }
       this.refreshTable();
@@ -84,5 +83,23 @@ export class BudgetTableComponent implements OnInit {
 
   refreshTable(): void {
     this.table.renderRows();
+  }
+
+  /**
+   * private helper methods for add, edit, delete
+   */
+  private AddNewBudget(newBudget: IBudget): void {
+    newBudget.id = this.budgetData.length + 1;
+    this.budgetData.push(newBudget);
+  }
+
+  private EditSelectedBudget(selectedBudget: IBudget): void {
+    let index = this.budgetData.findIndex(budget => budget.id === selectedBudget.id)
+    this.budgetData[index] = selectedBudget;
+  }
+
+  private DeleteSelectedBudget(budgetId: number): void {
+    let index = this.budgetData.findIndex(budget => budget.id === budgetId);
+    index !== -1 ? this.budgetData.splice(index, 1) : alert("Can not find element to delete");
   }
 }
