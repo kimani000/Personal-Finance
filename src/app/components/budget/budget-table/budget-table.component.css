@@ -1,5 +1,7 @@
 table {
-    width: 90% !important;
+    height: 300px;
+    width: auto;
+    margin-top: 10px;
 }
 
 button {
@@ -7,3 +9,9 @@ button {
   background-color: transparent;
 }
   
+
+#bugetSummaryCol {
+  height: inherit;
+  padding-top: 45px;
+  margin-left: 50px;
+}

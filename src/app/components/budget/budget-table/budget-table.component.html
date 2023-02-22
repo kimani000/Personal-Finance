@@ -2,57 +2,65 @@
 
     <!-- Left Column-->
     <div class="col-md-8 pt-3">
-        <table mat-table [dataSource]="budgetData" class="mat-elevation-z8">
+        <div class="row h-auto w-100 p-b4">
+            <h2 class="display-5 text-center border-bottom">Budgets</h2>
+        </div>
 
-            <!-- Id Column -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+        <div id="displayContainer" class="row">
+            <table mat-table [dataSource]="budgetData" [fixedLayout]="true" class="mat-elevation-z8">
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
+                <!-- Id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
 
-            <!-- Category Column -->
-            <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef> Category </th>
-                <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-            </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
 
-            <!-- Projected Cost Column -->
-            <ng-container matColumnDef="projectedCost">
-                <th mat-header-cell *matHeaderCellDef> Projected Cost </th>
-                <td mat-cell *matCellDef="let element"> {{element.projectedCost | currency }} </td>
-            </ng-container>
+                <!-- Category Column -->
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef> Category </th>
+                    <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                </ng-container>
 
-            <!-- Actual Cost Column -->
-            <ng-container matColumnDef="actualCost">
-                <th mat-header-cell *matHeaderCellDef> Actual Cost </th>
-                <td mat-cell *matCellDef="let element"> {{element.actualCost | currency}} </td>
-            </ng-container>
+                <!-- Projected Cost Column -->
+                <ng-container matColumnDef="projectedCost">
+                    <th mat-header-cell *matHeaderCellDef> Projected Cost </th>
+                    <td mat-cell *matCellDef="let element"> {{element.projectedCost | currency }} </td>
+                </ng-container>
 
-            <!-- Difference Column -->
-            <ng-container matColumnDef="difference">
-                <th mat-header-cell *matHeaderCellDef> Difference </th>
-                <td mat-cell *matCellDef="let element"> {{element.difference | currency}} </td>
-            </ng-container>
+                <!-- Actual Cost Column -->
+                <ng-container matColumnDef="actualCost">
+                    <th mat-header-cell *matHeaderCellDef> Actual Cost </th>
+                    <td mat-cell *matCellDef="let element"> {{element.actualCost | currency}} </td>
+                </ng-container>
 
-            <!-- Actions Column -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
-                <td mat-cell *matCellDef="let element" class="text-center">
-                    <button mat-button (click)="budgetTableAction('Edit', element)"><i class="fa-solid fa-pen"></i></button>
-                    |
-                    <button mat-button (click)="budgetTableAction('Delete', element)"><i class="fa-solid fa-xmark"></i></button>
-                </td>
-            </ng-container>
+                <!-- Difference Column -->
+                <ng-container matColumnDef="difference">
+                    <th mat-header-cell *matHeaderCellDef> Difference </th>
+                    <td mat-cell *matCellDef="let element"> {{element.difference | currency}} </td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                    <td mat-cell *matCellDef="let element" class="text-center">
+                        <button mat-button (click)="budgetTableAction('Edit', element)"><i
+                                class="fa-solid fa-pen"></i></button>
+                        |
+                        <button mat-button (click)="budgetTableAction('Delete', element)"><i
+                                class="fa-solid fa-xmark"></i></button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
 
         <div class="row float-end add-btn-row">
             <button id="btnAddNew" (click)="budgetTableAction('Add')" class="btn btn-primary rounded">
@@ -62,7 +70,21 @@
     </div>
 
     <!-- Right Column-->
-    <div class="col-md-4 text-center pt-4 my-auto pt-2">
-        <!-- TODO: Figure out what goes here-->
+    <div class="col-md-4 pt-4 my-auto">
+        <div id="budgetSummaryCol" class="text-end ml-3">
+            <!-- Projceted Cost Total-->
+            <p class="display-5 bold"><b>{{projetedCostTitle}}</b></p>
+            <p class="display-5 border-bottom mb-1">{{totalProjectedCost | currency: 'USD'}}</p>
+
+            <!-- Actual Cost Total-->
+            <p class="display-5"><b>{{actualCostTitle}}</b></p>
+            <p class="display-5 border-bottom mb-1">{{totalActualCost | currency: 'USD'}}</p>
+
+            <!-- Combined Difference-->
+            <p class="display-5"><b>{{differenceTitle}}</b></p>
+            <p class="display-5">
+                <span *ngIf="combinedDifference > 1">+</span>
+                {{combinedDifference | currency: 'USD'}}</p>
+        </div>
     </div>
 </div>
