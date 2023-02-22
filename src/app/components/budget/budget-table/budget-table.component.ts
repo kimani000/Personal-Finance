@@ -21,6 +21,18 @@ export class BudgetTableComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'category', 'projectedCost', 'actualCost', 'difference', 'actions'];
   budgetData: Budget[] = [];
 
+  // total projected cost 
+  projetedCostTitle: string = 'Projected Cost';
+  totalProjectedCost: number = 0;
+
+  // total actual cost
+  actualCostTitle: string = 'Actual Cost';
+  totalActualCost: number = 0;
+
+  // combined difference
+  differenceTitle: string = 'Difference';
+  combinedDifference: number = 0;
+
   // DOM ref
   @ViewChild(MatTable) table!: MatTable<any>;
 
@@ -34,25 +46,30 @@ export class BudgetTableComponent implements OnInit {
     this.sub = this.budgetService.getBudgets().subscribe({
       next: budget => {
         this.budgetData = budget;
+        this.initTotalProjectCost();
+        this.initTotalActualCost();
+        this.initCombinedDifference();
       }
-    })
+    });
+    
   }
 
   /**  
    * function that handles add, edit, and delete.
    * also launches MatDialog */
   budgetTableAction(action: ("Add" | "Edit" | "Delete"), budget?: Budget): void {
-    let budgetObj: Budget;
     /**
      * if the user selects edit or delete, set the selected budget to vairable
      * if the user selects add, create a new instance of Budget
-     */
+    */
+    let budgetObj: Budget;
     if (budget) budgetObj = budget;
     else budgetObj = Budget.createNewBudget();
 
     // set configuration for MatDialog
     const dialogConfig = new MatDialogConfig();
 
+    // set user's selected action and selected/new budget obj
     dialogConfig.data = {
       action: action,
       budgetObj: budgetObj
@@ -61,6 +78,7 @@ export class BudgetTableComponent implements OnInit {
 
     let dialogRef = this.dialog.open(BudgetTableActionModalComponent, dialogConfig);
 
+    // after modal is closed....
     dialogRef.afterClosed().subscribe(response => {
       /**
        * TODO:
@@ -68,38 +86,60 @@ export class BudgetTableComponent implements OnInit {
        */
       switch (response.action) {
         case "Add":
-          this.AddNewBudget(response.budgetObj);
+          this.addNewBudget(response.budgetObj);
           break;
         case "Edit":
-          this.EditSelectedBudget(response.budgetObj);
+          this.editSelectedBudget(response.budgetObj);
           break;
         case "Delete":
-          this.DeleteSelectedBudget(response.budgetObj.id)
+          this.deleteSelectedBudget(response.budgetObj.id)
           break;
       }
       this.refreshTable();
     });
   }
 
-  refreshTable(): void {
+  /**
+   * private helper methods
+   */
+
+  // refreshes Mat-Table
+  private refreshTable(): void {
     this.table.renderRows();
   }
 
-  /**
-   * private helper methods for add, edit, delete
-   */
-  private AddNewBudget(newBudget: IBudget): void {
+  // add, edit, delete budget
+  private addNewBudget(newBudget: IBudget): void {
     newBudget.id = this.budgetData.length + 1;
     this.budgetData.push(newBudget);
   }
 
-  private EditSelectedBudget(selectedBudget: IBudget): void {
+  private editSelectedBudget(selectedBudget: IBudget): void {
     let index = this.budgetData.findIndex(budget => budget.id === selectedBudget.id)
     this.budgetData[index] = selectedBudget;
   }
 
-  private DeleteSelectedBudget(budgetId: number): void {
+  private deleteSelectedBudget(budgetId: number): void {
     let index = this.budgetData.findIndex(budget => budget.id === budgetId);
     index !== -1 ? this.budgetData.splice(index, 1) : alert("Can not find element to delete");
+  }
+
+  // initialize total projected cost
+  private initTotalProjectCost(): void {
+    this.budgetData.forEach(budget => {
+      this.totalProjectedCost += budget.projectedCost;
+    });
+  }
+
+  // get total actual cost
+  private initTotalActualCost(): void {
+    this.budgetData.forEach(budget => {
+      this.totalActualCost += budget.actualCost;
+    });
+  }
+
+  // get combined difference
+  private initCombinedDifference(): void {
+    this.combinedDifference = this.totalProjectedCost - this.totalActualCost;
   }
 }
