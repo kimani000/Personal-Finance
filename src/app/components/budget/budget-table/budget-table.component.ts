@@ -23,15 +23,15 @@ export class BudgetTableComponent implements OnInit {
 
   // total projected cost 
   projetedCostTitle: string = 'Projected Cost';
-  totalProjectedCost: number = 0;
+  totalProjectedCost!: number;
 
   // total actual cost
   actualCostTitle: string = 'Actual Cost';
-  totalActualCost: number = 0;
+  totalActualCost!: number;
 
   // combined difference
   differenceTitle: string = 'Difference';
-  combinedDifference: number = 0;
+  combinedDifference!: number;
 
   // DOM ref
   @ViewChild(MatTable) table!: MatTable<any>;
@@ -51,7 +51,7 @@ export class BudgetTableComponent implements OnInit {
         this.initCombinedDifference();
       }
     });
-    
+
   }
 
   /**  
@@ -93,8 +93,12 @@ export class BudgetTableComponent implements OnInit {
           break;
         case "Delete":
           this.deleteSelectedBudget(response.budgetObj.id)
-          break;
       }
+      // modify budget breakdown variables
+      this.adjustTotalProjectCost(response.action, response.budgetObj.projectedCost);
+      this.adjustTotalActualCost(response.action, response.budgetObj.actualCost)
+      this.initCombinedDifference();
+
       this.refreshTable();
     });
   }
@@ -126,19 +130,53 @@ export class BudgetTableComponent implements OnInit {
 
   // initialize total projected cost
   private initTotalProjectCost(): void {
-    this.budgetData.forEach(budget => {
-      this.totalProjectedCost += budget.projectedCost;
-    });
+    this.totalProjectedCost = 0;
+
+      this.budgetData.forEach(budget => {
+        this.totalProjectedCost += budget.projectedCost;
+      });
   }
 
-  // get total actual cost
-  private initTotalActualCost(): void {
+  // adjust total projected cost
+  private adjustTotalProjectCost(action: string, projectedCost: number): void {
+    switch (action) {
+      case "Add":
+        this.totalProjectedCost += projectedCost;
+        break;
+      case "Edit":
+        this.initTotalProjectCost();
+        break;
+      case "Delete":
+        this.totalProjectedCost -= projectedCost;
+        break;
+    }
+  }
+
+  // initialize total actual cost
+  private initTotalActualCost(action?: string, actualCost?: number): void {
+    this.totalActualCost = 0;
+
     this.budgetData.forEach(budget => {
       this.totalActualCost += budget.actualCost;
     });
   }
 
-  // get combined difference
+  // adjust total actual cost
+  private adjustTotalActualCost(action: string, actualCost: number): void {
+    switch (action) {
+      case "Add":
+        this.totalActualCost += actualCost;
+        break;
+      case "Edit":
+        this.initTotalActualCost();
+        break;
+      case "Delete":
+        this.totalActualCost -= actualCost;
+        break;
+    }
+  }
+
+  // initialize combined difference
   private initCombinedDifference(): void {
     this.combinedDifference = this.totalProjectedCost - this.totalActualCost;
   }

@@ -82,7 +82,9 @@
 
             <!-- Combined Difference-->
             <p class="display-5"><b>{{differenceTitle}}</b></p>
-            <p class="display-5">{{combinedDifference | currency: 'USD'}}</p>
+            <p class="display-5">
+                <span *ngIf="combinedDifference > 1">+</span>
+                {{combinedDifference | currency: 'USD'}}</p>
         </div>
     </div>
 </div>
