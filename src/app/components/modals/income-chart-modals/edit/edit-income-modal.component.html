@@ -1,0 +1,46 @@
+<h1 class="text-center my-1" mat-dialog-title style="font-size: x-large;">Edit Income</h1>
+
+<mat-stepper orientation="horizontal" linear="true" #stepper>
+
+    <mat-step [stepControl]="selectIncome">
+      <form [formGroup]="selectIncome">
+        <ng-template matStepLabel>Selet an income</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Income</mat-label>
+
+          <mat-select formControlName="category" required>
+            <mat-option *ngFor="let income of incomes; let i = index" [id]="i.toString()"
+                [value]="income">{{ income.incomeName }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="selectIncome.controls['income'].invalid">{{getErrorMessage()}}</mat-error>
+        
+      </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" class="text-end" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step >
+
+    <mat-step [stepControl]="editIncome">
+      <form [formGroup]="editIncome">
+        <ng-template matStepLabel>Edit information</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+          <mat-error *ngIf="editIncome.controls['name'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

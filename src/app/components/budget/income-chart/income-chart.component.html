@@ -1,4 +1,4 @@
-<div id="flexRowsBudget" class="d-flex flex-row">
+<div class="d-flex flex-row flexRowsBudget">
     <!-- Left column-->
     <div class="col-md-8 pt-3">
         <div class="row h-auto w-100">
@@ -13,9 +13,19 @@
         </div>
 
         <div class="row float-end add-accordion-btn-row">
-            <button id="btnAddNew" (click)="addIncome()" class="btn btn-primary rounded">
-                <span id="addNewIcon" class="fa-solid fa-plus float-start"></span>Add
-            </button>
+            <button mat-button [matMenuTriggerFor]="incomeActionMenu" class="btnTableAction text-white">Table Actions</button>
+
+            <mat-menu #incomeActionMenu="matMenu" [yPosition]="'above'" class="incomeActionMenu">
+                <button (click)="addIncome()" class="btn btn-primary rounded btnAddNew">
+                    <span class="fa-solid fa-plus float-start addNewIcon"></span>Add
+                </button>
+                <button (click)="editIncome()" class="btn btn-primary rounded btnAddNew">
+                    <span class="fa-solid fa-pen-to-square float-start addNewIcon"></span>Edit
+                </button>
+                <button (click)="deleteIncome()" class="btn btn-primary rounded btnAddNew">
+                    <span class="fa-solid fa-trash float-start addNewIcon"></span>Delete
+                </button>
+            </mat-menu>            
         </div>
     </div>
 

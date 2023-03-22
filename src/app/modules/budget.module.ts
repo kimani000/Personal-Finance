@@ -10,11 +10,13 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { BudgetTableComponent } from '../components/budget/budget-table/budget-table.component';
 import { BudgetComponent } from '../components/budget/budget.component';
-import { BudgetModalComponent } from '../components/modals/budget-modal/budget-modal.component';
+import { AddIncomeModalComponent } from '../components/modals/income-chart-modals/add/add-income-modal.component';
 import { ExpenseDetailComponent } from '../components/budget/expense-detail/expense-detail.component';
 import { IncomeChartComponent } from '../components/budget/income-chart/income-chart.component';
 import { ExpenseComponent } from '../components/budget/expense/expense.component';
 import { AddExpenseModalComponent } from '../components/modals/add-expense-modal/add-expense-modal.component';
+import { BudgetTableActionModalComponent } from '../components/modals/budget-table-action-modal/budget-table-action-modal.component';
+import { EditIncomeModalComponent } from '../components/modals/income-chart-modals/edit/edit-income-modal.component';
 
 import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -24,9 +26,10 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
-import { BudgetTableActionModalComponent } from '../components/modals/budget-table-action-modal/budget-table-action-modal.component';
 
 const routes: Routes = [
   { path: 'pfinance', pathMatch: 'prefix',
@@ -38,13 +41,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     BudgetComponent,
-    BudgetModalComponent,
+    AddIncomeModalComponent,
     IncomeChartComponent,
     ExpenseDetailComponent,
     ExpenseComponent,
     BudgetTableComponent,
     BudgetTableActionModalComponent,
     AddExpenseModalComponent,
+    EditIncomeModalComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +66,8 @@ const routes: Routes = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
+    MatStepperModule,
     RouterModule.forChild(routes)
   ]
 })

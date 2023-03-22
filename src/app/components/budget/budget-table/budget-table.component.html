@@ -1,4 +1,4 @@
-<div id="flexRowsBudget" class="d-flex flex-row">
+<div class="d-flex flex-row flexRowsBudget">
 
     <!-- Left Column-->
     <div class="col-md-8 pt-3">
@@ -63,8 +63,8 @@
         </div>
 
         <div class="row float-end add-btn-row">
-            <button id="btnAddNew" (click)="budgetTableAction('Add')" class="btn btn-primary rounded">
-                <span id="addNewIcon" class="fa-solid fa-plus float-start"></span>Add
+            <button (click)="budgetTableAction('Add')" class="btn btn-primary rounded btnAddNew">
+                <span class="fa-solid fa-plus float-start addNewIcon"></span>Add
             </button>
         </div>
     </div>

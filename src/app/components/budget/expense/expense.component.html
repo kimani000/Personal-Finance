@@ -1,5 +1,5 @@
 <!-- flex row containing expense information -->
-<div id="flexRowsBudget" class="d-flex flex-row">
+<div class="d-flex flex-row flexRowsBudget">
 
     <!-- Left column-->
     <div class="col-md-8 pt-3">
@@ -22,8 +22,8 @@
         <!-- Change this to addExpense() modal function-->
         <!-- (click)="addIncome('modal-2')" -->
         <div class="row float-end add-btn-row ">
-            <button id="btnAddNew" class="btn btn-primary rounded" (click)="AddNewExpense()">
-                <span id="addNewIcon" class="fa-solid fa-plus float-start"></span>Add
+            <button class="btn btn-primary rounded btnAddNew" (click)="AddNewExpense()">
+                <span  class="fa-solid fa-plus float-start addNewIcon"></span>Add
             </button>
         </div>
     </div>

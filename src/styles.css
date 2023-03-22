@@ -14,3 +14,14 @@ html, body { height: 100%; }
 /* If the below font were to be used, a lot of the sizing has to be readjusted */
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Style for Mat-Menu found in IncomeChartComponent
+    For some reason this style has to be applied globally for it to work. */
+.incomeActionMenu {
+    display: flex;
+    flex-direction: column;
+    height: 175px;
+    width: 50px;
+    background-color: transparent;
+}

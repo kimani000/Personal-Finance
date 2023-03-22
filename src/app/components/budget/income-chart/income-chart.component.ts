@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Subscription } from 'rxjs';
-import { ModalService } from 'src/app/services/modal/modal.service';
 import { BudgetService } from '../../../services/budget/budget.service';
 import { Income } from '../../../models/income.models';
-import { MatDialog } from '@angular/material/dialog';
-import { BudgetModalComponent } from '../../modals/budget-modal/budget-modal.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddIncomeModalComponent } from '../../modals/income-chart-modals/add/add-income-modal.component';
+import { EditIncomeModalComponent } from '../../modals/income-chart-modals/edit/edit-income-modal.component';
 
 @Component({
   selector: 'pf-income-chart',
@@ -31,7 +31,6 @@ export class IncomeChartComponent implements OnInit {
   }
   doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     responsive: true,
-    // Not working
     // onClick: this.onIncomeChartClick.bind(this)
   };
 
@@ -87,7 +86,7 @@ export class IncomeChartComponent implements OnInit {
 
   // Functions for add new income functionality
   addIncome() {
-    let dialogRef = this.dialog.open(BudgetModalComponent, {
+    let dialogRef = this.dialog.open(AddIncomeModalComponent, {
       width: '500px'
     });
 
@@ -100,4 +99,17 @@ export class IncomeChartComponent implements OnInit {
     });
   }
 
+  editIncome(): void{
+    let dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = this.incomes;
+    dialogConfig.width = "750px";
+    dialogConfig.height = "300px";
+
+    let dialogRef = this.dialog.open(EditIncomeModalComponent, dialogConfig);
+  }
+
+  deleteIncome(): void {
+
+  }
 }

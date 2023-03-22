@@ -74,6 +74,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   // Functions for expenses
   displaySpendingInCategory(expenseCategory: ExpenseCategory): void{
+    this.dialog.ngOnDestroy();
     this.expenseCategoryIsSelected = true;
     this.expenseArrByCategory = this.expenses.filter(expense => {
       return expense.category === expenseCategory;

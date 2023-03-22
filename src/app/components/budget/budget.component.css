@@ -1,4 +1,4 @@
-#flexRowsBudget {
+.flexRowsBudget {
     margin: 1em 3em 3em 3em;
     padding: 1em 1em 2em 1em;
 }
@@ -7,11 +7,11 @@
     margin-top: 20px;
     width: 100px;
 }
-#addNewIcon {
+.addNewIcon {
     padding-top: 4px;
 }
 
-#btnAddNew {
+.btnAddNew {
     font-size: large;
     border: solid inherit 1px;
     width: 100px;
@@ -19,7 +19,15 @@
     border: solid #3b71ca 1px;
 }
 
-#btnAddNew:hover {
+.btnTableAction {
+    font-size: large;
+    border: solid inherit 1px;
+    width: 200px;
+    background-color: #3b71ca;
+    border: solid #3b71ca 1px;
+}
+
+.btnAddNew:hover {
     background-color: white;
     color: #3b71ca;
     border: solid #3b71ca 1px;

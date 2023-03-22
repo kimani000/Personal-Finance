@@ -18,7 +18,7 @@ export class BudgetTableActionModalComponent implements OnInit {
   isAddNewBudget: boolean;
   isEditBudget: boolean;
 
-  budgetForm!: FormGroup;
+  budgetForm: FormGroup;
   expenseCategoryArr: ExpenseCategory[];
 
   constructor(private dialogRef: MatDialogRef<BudgetTableActionModalComponent>,

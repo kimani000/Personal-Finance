@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Income } from '../../../models/income.models';
+import { Income } from '../../../../models/income.models';
 
 @Component({
   selector: 'pf-budget-modal',
-  templateUrl: './budget-modal.component.html',
-  styleUrls: ['./budget-modal.component.css']
+  templateUrl: './add-income-modal.component.html',
+  styleUrls: ['./add-income-modal.component.css']
 })
-export class BudgetModalComponent implements OnInit {
+export class AddIncomeModalComponent implements OnInit {
   
   newIncomeForm: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<BudgetModalComponent>,
+  constructor(private dialogRef: MatDialogRef<AddIncomeModalComponent>,
               private fb: FormBuilder) {
 
                 this.newIncomeForm = this.fb.group({

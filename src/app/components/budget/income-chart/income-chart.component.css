@@ -1,8 +1,11 @@
-pf-budget-modal {
-    display: none;
-}
-
 #charts {
     height: 600px !important;
     width: 600px !important;
+}
+
+
+button.btnAddNew {
+    margin-top: 6px;
+    margin-bottom: 5px;
+    margin-left: 6px;
 }
