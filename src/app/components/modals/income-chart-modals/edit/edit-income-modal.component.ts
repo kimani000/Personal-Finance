@@ -16,7 +16,6 @@ export class EditIncomeModalComponent {
   selectIncome: FormGroup;
   editIncome: FormGroup;
 
-
   constructor(private dialogRef: MatDialogRef<EditIncomeModalComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) data: IIncome[]) {
@@ -30,7 +29,14 @@ export class EditIncomeModalComponent {
     this.editIncome = new FormGroup(null);
   }
 
-  stepper1Complete(): boolean {
+  /**
+   * TODO:
+   *      Next button on step 1 does not move onto the next step.
+   *      Issue might be related validation not passing.
+   *      look into [complete]
+   *      look into [stepControl] 
+   */
+  stepper1Complete(): void {
     if (this.selectIncome.valid) {
       let formValue = this.selectIncome.getRawValue();
 
@@ -40,9 +46,6 @@ export class EditIncomeModalComponent {
         amount: new FormControl<number>(formValue.income.incomeAmount, Validators.required)
       });
     } 
-    else return false;
-
-    return true;
   }
 
   getErrorMessage(): string {
