@@ -12,8 +12,8 @@
 
         </div>
 
-        <div class="row float-end add-accordion-btn-row">
-            <button mat-button [matMenuTriggerFor]="incomeActionMenu" class="btnTableAction text-white">Table Actions</button>
+        <div class="row float-end">
+            <button mat-button [matMenuTriggerFor]="incomeActionMenu" class="btnTableAction text-white">Modify Income</button>
 
             <mat-menu #incomeActionMenu="matMenu" [yPosition]="'above'" class="incomeActionMenu">
                 <button (click)="addIncome()" class="btn btn-primary rounded btnAddNew">

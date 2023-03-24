@@ -1,20 +1,33 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnChanges, OnInit, ViewChild } from '@angular/core';
+
 import { IIncome } from 'src/app/models/interfaces/income.interface';
+
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'pf-edit-income-modal',
   templateUrl: './edit-income-modal.component.html',
-  styleUrls: ['./edit-income-modal.component.css']
+  styleUrls: ['./edit-income-modal.component.css'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
+
 })
-export class EditIncomeModalComponent {
+
+export class EditIncomeModalComponent implements OnInit {
 
   incomes: IIncome[];
 
   // FormGroup for stepper (Angular Material)
-  selectIncome: FormGroup;
-  editIncome: FormGroup;
+  selectIncomeForm: FormGroup;
+  editIncomeForm!: FormGroup;
+
+  isComplete: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<EditIncomeModalComponent>,
     private fb: FormBuilder,
@@ -22,30 +35,25 @@ export class EditIncomeModalComponent {
 
     this.incomes = data;
 
-    this.selectIncome = fb.group({
+    this.selectIncomeForm = fb.group({
       income: new FormControl<IIncome | null>(null, Validators.required)
     });
 
-    this.editIncome = new FormGroup(null);
+    this.editIncomeForm = this.fb.group({
+      id: new FormControl<number | null>(null, Validators.required),
+      name: new FormControl<string>('', Validators.required),
+      amount: new FormControl<number | null>(null, Validators.required)
+    });
   }
 
-  /**
-   * TODO:
-   *      Next button on step 1 does not move onto the next step.
-   *      Issue might be related validation not passing.
-   *      look into [complete]
-   *      look into [stepControl] 
-   */
-  stepper1Complete(): void {
-    if (this.selectIncome.valid) {
-      let formValue = this.selectIncome.getRawValue();
+  ngOnInit(): void {
+    // If user selects an income, populate the edit form group with its info
+    this.selectIncomeForm.get('income')?.valueChanges.subscribe(val => {
 
-      this.editIncome = this.fb.group({
-        id: new FormControl<number>(formValue.income.incomeId, Validators.required),
-        name: new FormControl<string>(formValue.income.incomeName, Validators.required),
-        amount: new FormControl<number>(formValue.income.incomeAmount, Validators.required)
-      });
-    } 
+      this.editIncomeForm.controls['id'].setValue(val.id);
+      this.editIncomeForm.controls['name'].setValue(val.incomeName);
+      this.editIncomeForm.controls['amount'].setValue(val.incomeAmount);
+    })
   }
 
   getErrorMessage(): string {

@@ -11,7 +11,7 @@ import { BudgetService } from 'src/app/services/budget/budget.service';
 @Component({
   selector: 'pf-add-expense-modal',
   templateUrl: './add-expense-modal.component.html',
-  styleUrls: ['./add-expense-modal.component.css', '../budget-modal/budget-modal.component.css']
+  styleUrls: ['./add-expense-modal.component.css', '../income-chart-modals/add/add-income-modal.component.css']
 })
 export class AddExpenseModalComponent implements OnInit {
 

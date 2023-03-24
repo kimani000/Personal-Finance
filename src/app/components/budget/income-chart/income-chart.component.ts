@@ -104,7 +104,7 @@ export class IncomeChartComponent implements OnInit {
 
     dialogConfig.data = this.incomes;
     dialogConfig.width = "750px";
-    dialogConfig.height = "300px";
+    dialogConfig.height = "390px";
 
     let dialogRef = this.dialog.open(EditIncomeModalComponent, dialogConfig);
   }

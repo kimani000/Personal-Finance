@@ -1,46 +1,63 @@
 <h1 class="text-center my-1" mat-dialog-title style="font-size: x-large;">Edit Income</h1>
 
-<mat-stepper orientation="horizontal" linear="true" #stepper>
+<mat-stepper errormessage="Select an income." orientation="horizontal" linear #stepper>
 
-    <mat-step [stepControl]="selectIncome">
-      <form [formGroup]="selectIncome">
-        <ng-template matStepLabel>Selet an income</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Income</mat-label>
+  <mat-step [stepControl]="selectIncomeForm">
+    <form [formGroup]="selectIncomeForm">
 
-          <mat-select formControlName="category" required>
-            <mat-option *ngFor="let income of incomes; let i = index" [id]="i.toString()"
-                [value]="income">{{ income.incomeName }}</mat-option>
+      <ng-template matStepLabel>Selet an income</ng-template>
+
+      <div class="row" style="margin-top: 40px;">
+      <mat-form-field appearance="fill">
+        <mat-label>Income</mat-label>
+        <mat-select formControlName="income" required>
+          <mat-option *ngFor="let income of incomes; let i = index" [id]="i.toString()" [value]="income">{{
+            income.incomeName }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="selectIncome.controls['income'].invalid">{{getErrorMessage()}}</mat-error>
-        
+        <mat-error *ngIf="selectIncomeForm.controls['income'].invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" class="text-end" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step >
+      </div>
 
-    <mat-step [stepControl]="editIncome">
-      <form [formGroup]="editIncome">
-        <ng-template matStepLabel>Edit information</ng-template>
+      <div class="mt-5 float-end">
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="editIncomeForm">
+    <form [formGroup]="editIncomeForm">
+
+      <ng-template matStepLabel>Edit information</ng-template>
+
+      <div class="row d-block">
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input matInput formControlName="name">
-          <mat-error *ngIf="editIncome.controls['name'].invalid">{{getErrorMessage()}}</mat-error>
+          <input matInput formControlName="name" class="w-50" required>
+          <mat-error *ngIf="editIncomeForm.controls['name'].invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount" min="0"required>
+          <mat-error *ngIf="editIncomeForm.controls['amount'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
       </div>
-    </mat-step>
-  </mat-stepper>
+
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious class="btn">Back</button>
+        <button mat-raised-button color="primary" matStepperNext class="btn float-end">Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
