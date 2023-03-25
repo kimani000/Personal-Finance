@@ -67,6 +67,7 @@ export class IncomeChartComponent implements OnInit {
       this.totalIncome += newIncomeAmount;
     }
     else{
+      this.totalIncome = 0;
       this.totalIncome += this.incomes.reduce((sum, income) => sum + income.incomeAmount, 0);
     }
   }
@@ -107,6 +108,16 @@ export class IncomeChartComponent implements OnInit {
     dialogConfig.height = "390px";
 
     let dialogRef = this.dialog.open(EditIncomeModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(response => {
+
+      let index = this.incomes.findIndex(x => x.incomeId === response.incomeId);
+      this.incomes[index] = response;
+      let chartDataIndex = this.doughnutChartData.datasets[0].data.findIndex(response.incomeId);
+      this.doughnutChartData.datasets[0].data[chartDataIndex] = response;
+      this.getTotalIncomeLogged();
+      this.updateChart();
+    });
   }
 
   deleteIncome(): void {

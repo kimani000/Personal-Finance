@@ -1,10 +1,11 @@
-import { Component, Inject, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 
 import { IIncome } from 'src/app/models/interfaces/income.interface';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { Income } from 'src/app/models/income.models';
 
 @Component({
   selector: 'pf-edit-income-modal',
@@ -27,8 +28,6 @@ export class EditIncomeModalComponent implements OnInit {
   selectIncomeForm: FormGroup;
   editIncomeForm!: FormGroup;
 
-  isComplete: boolean = false;
-
   constructor(private dialogRef: MatDialogRef<EditIncomeModalComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) data: IIncome[]) {
@@ -40,7 +39,7 @@ export class EditIncomeModalComponent implements OnInit {
     });
 
     this.editIncomeForm = this.fb.group({
-      id: new FormControl<number | null>(null, Validators.required),
+      id: new FormControl<number | null>(null),
       name: new FormControl<string>('', Validators.required),
       amount: new FormControl<number | null>(null, Validators.required)
     });
@@ -49,11 +48,21 @@ export class EditIncomeModalComponent implements OnInit {
   ngOnInit(): void {
     // If user selects an income, populate the edit form group with its info
     this.selectIncomeForm.get('income')?.valueChanges.subscribe(val => {
-
-      this.editIncomeForm.controls['id'].setValue(val.id);
+      this.editIncomeForm.controls['id'].setValue(val.incomeId);
       this.editIncomeForm.controls['name'].setValue(val.incomeName);
       this.editIncomeForm.controls['amount'].setValue(val.incomeAmount);
     })
+  }
+
+  onSubmit(): void {
+    if(this.editIncomeForm.valid){
+      let formValue = this.editIncomeForm.getRawValue();
+
+      let outputData = new Income(formValue.name, formValue.amount);
+      outputData.incomeId = formValue.id;
+
+      this.dialogRef.close(outputData);
+    }
   }
 
   getErrorMessage(): string {

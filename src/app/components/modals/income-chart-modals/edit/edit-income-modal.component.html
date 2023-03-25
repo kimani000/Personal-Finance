@@ -8,14 +8,14 @@
       <ng-template matStepLabel>Selet an income</ng-template>
 
       <div class="row" style="margin-top: 40px;">
-      <mat-form-field appearance="fill">
-        <mat-label>Income</mat-label>
-        <mat-select formControlName="income" required>
-          <mat-option *ngFor="let income of incomes; let i = index" [id]="i.toString()" [value]="income">{{
-            income.incomeName }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="selectIncomeForm.controls['income'].invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Income</mat-label>
+          <mat-select formControlName="income" required>
+            <mat-option *ngFor="let income of incomes; let i = index" [id]="i.toString()" [value]="income">{{
+              income.incomeName }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="selectIncomeForm.controls['income'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
       </div>
 
       <div class="mt-5 float-end">
@@ -25,7 +25,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="editIncomeForm">
+  <mat-step>
     <form [formGroup]="editIncomeForm">
 
       <ng-template matStepLabel>Edit information</ng-template>
@@ -39,7 +39,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Amount</mat-label>
-          <input matInput formControlName="amount" min="0"required>
+          <input matInput formControlName="amount" min="0" required>
           <mat-error *ngIf="editIncomeForm.controls['amount'].invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>
@@ -52,12 +52,19 @@
     </form>
   </mat-step>
 
-  <mat-step>
+  <mat-step [stepControl]="editIncomeForm">
+
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+
+    <div class="text-center mt-3 mb-2">
+      <p class="display-6">You are now done.</p>
+      <p>You can either reset or save your changes!</p>
     </div>
+
+    <div class="d-flex align-items-end justify-content-between" style="margin-top: 80px;">
+      <button mat-raised-button color="warn" class="btn float-end" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary" class="btn" type="submit" (click)="onSubmit()">Save</button>
+    </div>
+
   </mat-step>
 </mat-stepper>
