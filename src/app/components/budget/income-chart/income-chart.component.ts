@@ -113,8 +113,12 @@ export class IncomeChartComponent implements OnInit {
 
       let index = this.incomes.findIndex(x => x.incomeId === response.incomeId);
       this.incomes[index] = response;
-      let chartDataIndex = this.doughnutChartData.datasets[0].data.findIndex(response.incomeId);
-      this.doughnutChartData.datasets[0].data[chartDataIndex] = response;
+      /**
+       * TODO: Might have to flush the chart data bc its value is incomeAmount.
+       *       How can I update the inomee amount directly without redoing the whole dataset??  
+       */
+      // let chartDataIndex = this.doughnutChartData.datasets[0].data.findIndex(x => x. === response.incomeId);
+      // this.doughnutChartData.datasets[0].data[chartDataIndex] = response;
       this.getTotalIncomeLogged();
       this.updateChart();
     });
